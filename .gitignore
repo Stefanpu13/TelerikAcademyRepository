@@ -44,10 +44,10 @@ local.properties
 *.sln.docstates
 # By me: Ignore solution files, config files,
 # csproj files and asssemblyInfo files.
-*.sln
-*.config
-*.csproj
-AssemblyInfo.cs
+#*.sln
+#*.config
+#*.csproj
+#AssemblyInfo.cs
 
 
 # Build results

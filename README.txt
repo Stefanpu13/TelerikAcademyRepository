@@ -1,0 +1,1 @@
+Most of the tasks given as homework from the C# programming track in the Telerik Academy.

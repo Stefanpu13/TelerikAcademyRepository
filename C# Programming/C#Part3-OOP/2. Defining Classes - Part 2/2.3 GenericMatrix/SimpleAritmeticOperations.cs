@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace GenericMatrix
 {
@@ -24,12 +22,12 @@ namespace GenericMatrix
                     // If adding or substracting
                     else
                     {
-                        return PerformAdditionOtSubstraction(first, second, operation);
+                        return PerformAdditionOrSubstraction(first, second, operation);
                     }
                 }
                 else
                 {
-                    string unsupportedTypeMessage = "The matrixes does not consist of numbers.";
+                    string unsupportedTypeMessage = "The matrixes do not consist of numbers.";
                     throw new ArgumentException(unsupportedTypeMessage);
                 }
             }
@@ -46,7 +44,7 @@ namespace GenericMatrix
             }
         }
 
-        private static Matrix<T> PerformAdditionOtSubstraction(Matrix<T> first, Matrix<T> second, ArithmeticOperations operation)
+        private static Matrix<T> PerformAdditionOrSubstraction(Matrix<T> first, Matrix<T> second, ArithmeticOperations operation)
         {
             if ((first.Rows == second.Rows && first.Cols == second.Cols))
             {

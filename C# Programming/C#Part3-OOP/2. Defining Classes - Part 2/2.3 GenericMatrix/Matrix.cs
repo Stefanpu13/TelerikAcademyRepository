@@ -96,11 +96,26 @@ namespace GenericMatrix
         }
 
         // The way I understand it, the task is to return true if at least one element is not zero or null.
-        public static bool operator true(Matrix<T> matrix) 
+        public static bool operator true(Matrix<T> matrix)  
         {
             foreach (var item in matrix.Elements)
             {
-                if (item!=null && item!= default(T))
+                
+                if (!item.Equals(null) && !item.Equals(default(T)))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public static bool operator false(Matrix<T> matrix) 
+        {
+            //Alternatively:
+            //return matrix.Equals(true);
+            foreach (var item in matrix.Elements)
+            {
+                if (item.Equals(null) || item.Equals(default(T)))
                 {
                     return true;
                 }

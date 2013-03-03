@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ArithmeticOperations.cs" />
+    <Compile Include="Class1.cs" />
     <Compile Include="TestClass.cs" />
     <Compile Include="Matrix.cs" />
     <Compile Include="NumbersTypes.cs" />

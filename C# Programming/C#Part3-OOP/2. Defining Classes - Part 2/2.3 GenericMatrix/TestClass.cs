@@ -11,15 +11,6 @@ namespace GenericMatrix
            Matrix<T> multiplicationMatrix)
         {
             Console.WriteLine("\n" + matrixType.ToUpper() +" TYPE\n");
-
-            if (matrixType.ToUpper()=="DECIMAL")
-            {
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("Decimal type is intentionally not included in the list of allowed types" +
-                    " due to testing purposes.");
-                Console.ResetColor();   
-            }
-            
             #region
             // Addition
             #region

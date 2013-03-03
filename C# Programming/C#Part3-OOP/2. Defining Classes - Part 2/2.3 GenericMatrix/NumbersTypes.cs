@@ -15,7 +15,7 @@ namespace GenericMatrix
         // must be appended.
         private static readonly List<Type> numberTypes = new List<Type>() {  typeof(byte), typeof(sbyte),
         typeof(short), typeof(ushort), typeof(int), typeof(uint), typeof(long), typeof(ulong),
-        typeof(float), typeof(Double), typeof(BigInteger), typeof(Complex)};
+        typeof(float),typeof(decimal), typeof(Double), typeof(BigInteger), typeof(Complex)};
 
         public static List<Type> Types
         {
@@ -36,20 +36,11 @@ namespace GenericMatrix
             // See: http://msdn.microsoft.com/en-us/library/w3f99sx1.aspx for "Type.GetType"
             // See: http://msdn.microsoft.com/en-us/library/system.type.assemblyqualifiedname.aspx 
             // for "Type.AssemblyQualifiedName" property.
+            string assemblyName = item.AssemblyQualifiedName;
 
-            if (item!=null)
-            {
-                string assemblyName = item.AssemblyQualifiedName;
 
-                Type itemType = Type.GetType(assemblyName);
-                return numberTypes.Contains(itemType);
-            }
-            else
-            {
-                throw new NotImplementedException();
-            }
-
-            
+            Type itemType = Type.GetType(assemblyName);
+            return numberTypes.Contains(itemType);
         }
     }
 

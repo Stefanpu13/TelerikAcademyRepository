@@ -32,11 +32,11 @@ namespace GenericMatrix
 
 
         public static Matrix<T> operator +(Matrix<T> first, Matrix<T> second)
-        {  
+        {           
                 Matrix<T> result =
                 SimpleArithmeticOperations<T>.
-                PerformMatricesArithmeticOperation(first, second, ArithmeticOperations.Addition); 
-               
+                PerformMatricesArithmeticOperation(first, second, ArithmeticOperations.Addition);
+
                 return result;          
         }
 
@@ -79,20 +79,12 @@ namespace GenericMatrix
 
         public static Matrix<T> operator *(Matrix<T> first, Matrix<T> second)
         {
-            if (first.Cols == second.Rows)
-            {
+            
                 Matrix<T> result =
                 SimpleArithmeticOperations<T>.
                 PerformMatricesArithmeticOperation(first, second, ArithmeticOperations.Multiplication);
                 return result;
-            }
-
-            else
-            {
-                string message = "Matrixes can`t multiplied because first matrix height " +
-                    " is not equal to second matrix width ";
-                throw new InvalidOperationException(message);
-            }
+           
         }
 
         // The way I understand it, the task is to return true if at least one element is not zero or null.

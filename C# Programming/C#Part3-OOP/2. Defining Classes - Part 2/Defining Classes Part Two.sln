@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Point", "Point\Point.csproj", "{42F720B2-4A40-4E6C-8F1C-1A96FEB98B47}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Point", "2.1 Point3D\Point.csproj", "{42F720B2-4A40-4E6C-8F1C-1A96FEB98B47}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenericListProject", "GenericListProject\GenericListProject.csproj", "{A3C3AF7A-791E-425F-96F0-63A68D1D6BF6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenericListProject", "2.2 GenericListProject\GenericListProject.csproj", "{A3C3AF7A-791E-425F-96F0-63A68D1D6BF6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenericMatrix", "GenericMatrix\GenericMatrix.csproj", "{FA214511-A893-4A20-9BEC-EE2EACB502E3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenericMatrix", "2.3 GenericMatrix\GenericMatrix.csproj", "{FA214511-A893-4A20-9BEC-EE2EACB502E3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VersionAttribute", "2.4 VersionAttribute\VersionAttribute.csproj", "{A420CBBA-9538-4327-814A-34270B40BD7F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,6 +27,10 @@ Global
 		{FA214511-A893-4A20-9BEC-EE2EACB502E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FA214511-A893-4A20-9BEC-EE2EACB502E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FA214511-A893-4A20-9BEC-EE2EACB502E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A420CBBA-9538-4327-814A-34270B40BD7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A420CBBA-9538-4327-814A-34270B40BD7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A420CBBA-9538-4327-814A-34270B40BD7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A420CBBA-9538-4327-814A-34270B40BD7F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

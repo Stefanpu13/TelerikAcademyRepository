@@ -6,18 +6,25 @@ namespace GenericMatrix
 {
     internal static class SimpleArithmeticOperations<T>
     {
+        //Just for demonstration on how to use generic delegate.
+        public delegate Matrix<T> OpertationsDelegate<T>(Matrix<T> first, Matrix<T> second);
+
         internal static Matrix<T> PerformMatricesArithmeticOperation
             (Matrix<T> first, Matrix<T> second, ArithmeticOperations operation)
         {
             if (first != null && second != null)
             {
                 Type matrixType = typeof(T);
+                //Generic delegate object is declared after it is certain that an operation is possible.
+                OpertationsDelegate<T> arithmetics;
 
                 if (NumbersTypes.IsNumberType(matrixType))
                 {
                     if (operation == ArithmeticOperations.Multiplication)
                     {
-                        return MultiplyMatrices(first, second);
+                        //Generic delegate object is initialised in the respective arithmetic case.
+                        arithmetics = MultiplyMatrices;
+                        return arithmetics(first, second);
                     }                    
                     else if (operation==ArithmeticOperations.Addition)
                     {

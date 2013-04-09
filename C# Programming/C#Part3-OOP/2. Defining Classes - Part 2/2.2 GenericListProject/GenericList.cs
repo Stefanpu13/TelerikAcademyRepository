@@ -46,6 +46,7 @@ namespace GenericListProject
             }
         }
 
+
         public T[] ItemsArray
         {
             get
@@ -99,6 +100,7 @@ namespace GenericListProject
 
             }
         }
+
 
         public void Add(T item)
         {

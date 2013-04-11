@@ -5,17 +5,14 @@ using Wintellect.PowerCollections;
 
 namespace _1.Events
 {
-
-    
-
-    class Program
+    class Events
     {
 
         static EventHolder events = new EventHolder();
 
         static void Main(string[] args)
         {
-            Console.WriteLine(string.Empty + events.GetType().Name);
+           
             while (ExecuteNextCommand())
             {
 

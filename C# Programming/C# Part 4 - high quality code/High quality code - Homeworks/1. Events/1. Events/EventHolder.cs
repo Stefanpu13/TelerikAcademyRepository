@@ -15,6 +15,7 @@ namespace _1.Events
             Event newEvent = new Event(date, title, location);
             byTitle.Add(title.ToLower(), newEvent);
             byDate.Add(newEvent);
+            
             // TODO: Implement event subscribtion and alert of messages.
             Message.EventAdded();
         }
@@ -22,37 +23,37 @@ namespace _1.Events
         public void DeleteEvents(string titleToDelete)
         {
             string title = titleToDelete.ToLower();
-            int eventsToRemoveCount= 0;
+            int removedEventsCount= 0;
 
             foreach (var eventToRemove in byTitle[title])
             {
-                eventsToRemoveCount++;
+                removedEventsCount++;
                 byDate.Remove(eventToRemove);
             }
             byTitle.Remove(title);
             // TODO: Implement event subscribtion and alert of messages.
-            Message.EventDeleted(eventsToRemoveCount);
+            Message.EventDeleted(removedEventsCount);
         }
 
         public void ListEvents(DateTime date, int count)
         {
             OrderedBag<Event>.View eventsToShow = 
                 byDate.RangeFrom(new Event(date, string.Empty, string.Empty), true);
-            int showed = 0;
+            int showedEventsCount = 0;
 
             // TODO: Change "foreach" with "for".
             foreach (var eventToShow in eventsToShow)
             {
-                if (showed == count)
+                if (showedEventsCount == count)
                 {
                     break;
                 }
                 // TODO: Implement event subscribtion and alert of messages.
                 Message.PrintEvent(eventToShow);
-                showed++;
+                showedEventsCount++;
             }
 
-            if (showed == 0)
+            if (showedEventsCount == 0)
             {
                 // TODO: Implement event subscribtion and alert of messages.
                 Message.NoEventsFound();

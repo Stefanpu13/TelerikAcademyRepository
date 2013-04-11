@@ -13,15 +13,15 @@ namespace _1.Events
 
         // TODO: 
         // If " eventsToRemoveCount" remains consider negative values.
-        public static void EventDeleted(int eventsToRemoveCount)
+        public static void EventDeleted(int removedEventsCount)
         {
-            if (eventsToRemoveCount == 0)
+            if (removedEventsCount == 0)
             {
                 NoEventsFound();
             }
             else
             {
-                output.AppendFormat("{0} events deleted\n", eventsToRemoveCount);
+                output.AppendFormat("{0} events deleted\n", removedEventsCount);
             }
         }
 

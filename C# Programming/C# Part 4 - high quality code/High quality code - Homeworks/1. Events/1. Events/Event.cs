@@ -68,7 +68,6 @@ namespace _1.Events
 
             eventInformation.Append(Date.ToString("yyyy-MM-ddTHH:mm:ss"));
             eventInformation.Append(" | " + Title);
-
             if (Location != null && Location != string.Empty)
             {
                 eventInformation.Append(" | " + Location);

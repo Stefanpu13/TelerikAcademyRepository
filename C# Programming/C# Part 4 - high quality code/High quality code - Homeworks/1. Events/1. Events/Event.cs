@@ -23,22 +23,16 @@ namespace _1.Events
 
         public int CompareTo(object other)
         {
-            if (other ==null)
+            if (other == null)
             {
                 return 1;
             }
             else
-            { 
-                Event otherEvent = other as Event;
-                // If "as" casting fails....
-                if (otherEvent==null)
+            {
+                if (other is Event)
                 {
-                    string message = "Object passed for comparison is not of type " +
-                        this.GetType().Name;
-                    throw new ArgumentException(message);
-                }
-                else
-                {
+                    Event otherEvent = other as Event;
+
                     int comparisonResultByDate = this.Date.CompareTo(otherEvent.Date);
                     int comparisonResultByTitle = this.Title.CompareTo(otherEvent.Title);
                     int comparisonResultByLocation = this.Location.CompareTo(otherEvent.Location);
@@ -58,6 +52,12 @@ namespace _1.Events
                     {
                         return comparisonResultByDate;
                     }
+                }
+                else
+                {
+                    string message = "Object passed for comparison is not of type " +
+                       this.GetType().Name;
+                    throw new ArgumentException(message);
                 }
             }
         }

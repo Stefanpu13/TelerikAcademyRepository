@@ -15,7 +15,7 @@ namespace _1.Events
 
         static void Main(string[] args)
         {
-            Console.WriteLine("" + events.GetType().Name );
+            Console.WriteLine(string.Empty + events.GetType().Name);
             while (ExecuteNextCommand())
             {
 
@@ -85,7 +85,7 @@ namespace _1.Events
             if (firstPipeIndex == lastPipeIndex)
             {
                 eventTitle = commandForExecution.Substring(firstPipeIndex + 1).Trim();
-                eventLocation = "";
+                eventLocation = string.Empty;
             }
             else
             {

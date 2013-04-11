@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text;
 
 namespace _1.Events
 {
@@ -15,17 +11,17 @@ namespace _1.Events
             output.Append("Event added\n");
         }
 
-        // TODO: What is "x"? Rename and if more convenient - replace with other type.
-        // If " x" remains consider negative values.
-        public static void EventDeleted(int x)
+        // TODO: 
+        // If " eventsToRemoveCount" remains consider negative values.
+        public static void EventDeleted(int eventsToRemoveCount)
         {
-            if (x == 0)
+            if (eventsToRemoveCount == 0)
             {
                 NoEventsFound();
             }
             else
             {
-                output.AppendFormat("{0} events deleted\n", x);
+                output.AppendFormat("{0} events deleted\n", eventsToRemoveCount);
             }
         }
 

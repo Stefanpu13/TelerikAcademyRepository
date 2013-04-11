@@ -17,7 +17,7 @@ namespace _1.Events
             byDate.Add(newEvent);
             
             // TODO: Implement event subscribtion and alert of messages.
-            Message.EventAdded();
+            EventMessageSubscriber.EventAdded();
         }
 
         public void DeleteEvents(string titleToDelete)
@@ -32,7 +32,7 @@ namespace _1.Events
             }
             byTitle.Remove(title);
             // TODO: Implement event subscribtion and alert of messages.
-            Message.EventDeleted(removedEventsCount);
+            EventMessageSubscriber.EventDeleted(removedEventsCount);
         }
 
         public void ListEvents(DateTime date, int count)
@@ -49,14 +49,14 @@ namespace _1.Events
                     break;
                 }
                 // TODO: Implement event subscribtion and alert of messages.
-                Message.PrintEvent(eventToShow);
+                EventMessageSubscriber.PrintEvent(eventToShow);
                 showedEventsCount++;
             }
 
             if (showedEventsCount == 0)
             {
                 // TODO: Implement event subscribtion and alert of messages.
-                Message.NoEventsFound();
+                EventMessageSubscriber.NoEventsFound();
             }
         }
     }

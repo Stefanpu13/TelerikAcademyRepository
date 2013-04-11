@@ -2,7 +2,7 @@
 
 namespace _1.Events
 {
-    static class Message
+    static class EventMessageSubscriber
     {
         private static StringBuilder output = new StringBuilder();
 

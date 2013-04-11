@@ -7,20 +7,9 @@ namespace _1.Events
 {
     class Events
     {
-
         static EventHolder events = new EventHolder();
 
-        static void Main(string[] args)
-        {
-           
-            while (ExecuteNextCommand())
-            {
-
-            }
-            //Console.WriteLine(output);
-        }
-
-        private static bool ExecuteNextCommand()
+        internal static bool ExecuteNextCommand()
         {
             string command = Console.ReadLine();
             if (command[0] == 'A')

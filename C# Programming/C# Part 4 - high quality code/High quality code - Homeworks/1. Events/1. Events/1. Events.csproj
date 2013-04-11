@@ -47,7 +47,8 @@
     <Compile Include="Event.cs" />
     <Compile Include="EventHolder.cs" />
     <Compile Include="Events.cs" />
-    <Compile Include="Message.cs" />
+    <Compile Include="MainClass.cs" />
+    <Compile Include="EventMessageSubscriber.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

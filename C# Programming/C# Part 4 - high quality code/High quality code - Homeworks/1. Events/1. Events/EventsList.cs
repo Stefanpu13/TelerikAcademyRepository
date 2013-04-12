@@ -1,17 +1,32 @@
 using System;
 using System.Linq;
-using System.Text;
+using System.Collections.Generic;
 using Wintellect.PowerCollections;
 
 namespace _1.Events
 {
-    class Events
+    class EventsList
     {
         static EventHolder events = new EventHolder();
 
-        internal static bool ExecuteNextCommand()
+        internal static void ExecuteAllCommands() 
         {
-            string command = Console.ReadLine();
+
+        }
+
+        
+        internal static void ExecuteAllCommands(List<string> commands)
+        {
+
+
+        }
+
+        // TODO: Delete.
+        // Should I change the name to "ReadAndExecuteNextCommand" or to 
+        // leave the name and create separate functionality for reading commands. 
+        internal static bool ExecuteNextCommand(string command)
+        {
+            //string command = Console.ReadLine();
             if (command[0] == 'A')
             {
                 AddEvent(command);
@@ -22,7 +37,6 @@ namespace _1.Events
                 DeleteEvents(command);
                 return true;
             }
-
             if (command[0] == 'L')
             {
                 ListEvents(command);

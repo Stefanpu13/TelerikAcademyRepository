@@ -44,15 +44,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommandsProvider.cs" />
     <Compile Include="Event.cs" />
     <Compile Include="EventHolder.cs" />
-    <Compile Include="Events.cs" />
+    <Compile Include="EventsList.cs" />
     <Compile Include="MainClass.cs" />
     <Compile Include="EventMessageSubscriber.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="EventsMainClassDiagram.cd" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

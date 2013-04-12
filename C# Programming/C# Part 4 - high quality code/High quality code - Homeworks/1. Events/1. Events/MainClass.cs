@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 
 namespace _1.Events
 {
@@ -10,12 +10,13 @@ namespace _1.Events
     {
         static void Main(string[] args)
         {
+            
 
-            while (Events.ExecuteNextCommand())
-            {
+            //while (Events.ExecuteNextCommand())
+            //{
 
-            }
-            //Console.WriteLine(output);
+            //}
+            //Console.WriteLine(EventMessageSubscriber.Output);
         }
     }
 }

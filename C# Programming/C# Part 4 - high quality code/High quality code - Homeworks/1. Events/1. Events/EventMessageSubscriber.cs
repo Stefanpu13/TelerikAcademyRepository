@@ -6,6 +6,18 @@ namespace _1.Events
     {
         private static StringBuilder output = new StringBuilder();
 
+        public static StringBuilder Output
+        {
+            get
+            {
+                return output;
+            }
+            set
+            {
+                output = value;
+            }
+        }
+
         public static void EventAdded()
         {
             output.Append("Event added\n");

@@ -59,7 +59,7 @@ namespace _1.Events
                 case ("End"):
                     break;
                 default:
-                    EventMessageSubscriber.AppendEventActionNotFound(commandAction);
+                    EventMessageSubscriber.AppendEventActionNotFoundMessage(commandAction);
                     break;
             }
         }

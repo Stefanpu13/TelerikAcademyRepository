@@ -14,14 +14,12 @@ namespace _1.Events
             }
         }
 
-        public static void EventAdded()
+        public static void AppendEventAddedMessage()
         {
             output.Append("Event added\n");
         }
-
-        // TODO: 
-        // If " eventsToRemoveCount" remains consider negative values.
-        public static void EventDeleted(int removedEventsCount)
+        
+        public static void AppendEventDeletedMessage(int removedEventsCount)
         {
             if (removedEventsCount == 0)
             {
@@ -33,7 +31,7 @@ namespace _1.Events
             }
         }
 
-        public static void NoEventsFound()
+        public static void AppendNoEventsFoundMessage()
         {
             output.Append("No events found\n");
         }
@@ -46,7 +44,7 @@ namespace _1.Events
             }
         }
 
-        public static void AppendEventActionNotFound(string commandAction) 
+        public static void AppendEventActionNotFoundMessage(string commandAction) 
         {
             output.Append("Action \"" + commandAction + "\" not found.\n");
         }

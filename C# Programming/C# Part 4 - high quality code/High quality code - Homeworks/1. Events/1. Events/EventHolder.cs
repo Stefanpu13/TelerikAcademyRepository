@@ -17,7 +17,7 @@ namespace _1.Events
             eventsOrderedBag.Add(newEvent);
             
             // TODO: Implement event subscribtion and alert of messages.
-            EventMessageSubscriber.EventAdded();
+            EventMessageSubscriber.AppendEventAddedMessage();
         }
 
         public void DeleteEvents(string titleToDelete)
@@ -33,7 +33,7 @@ namespace _1.Events
             }
             eventsMultiDictionary.Remove(title);
             // TODO: Implement event subscribtion and alert of messages.
-            EventMessageSubscriber.EventDeleted(removedEventsCount);
+            EventMessageSubscriber.AppendEventDeletedMessage(removedEventsCount);
         }
 
         public void ListEvents(DateTime date, int count)
@@ -41,8 +41,7 @@ namespace _1.Events
             OrderedBag<Event>.View eventsToShow = 
                 eventsOrderedBag.RangeFrom(new Event(date, string.Empty, string.Empty), true);
             int showedEventsCount = 0;
-
-            // TODO: Change "foreach" with "for"?.
+            
             foreach (var eventToShow in eventsToShow)
             {
                 if (showedEventsCount == count)

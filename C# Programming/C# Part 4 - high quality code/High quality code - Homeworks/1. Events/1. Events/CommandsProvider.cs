@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.IO;
 
 
@@ -32,6 +30,7 @@ namespace _1.Events
             }
             catch (FileNotFoundException fnfe)
             {
+                // TODO: Implement fnfe message and display it instead of current message. 
                 Console.WriteLine("File " + filePath + " was not found.");
             }
 

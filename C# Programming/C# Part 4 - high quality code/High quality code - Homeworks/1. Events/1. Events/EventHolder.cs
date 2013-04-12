@@ -7,8 +7,16 @@ namespace _1.Events
 {
     class EventHolder
     {
-        MultiDictionary<string, Event> eventsMultiDictionary = new MultiDictionary<string, Event>(true);
-        OrderedBag<Event> eventsOrderedBag = new OrderedBag<Event>();
+        //public event EventHandler EventHolderChanged;
+
+        private readonly MultiDictionary<string, Event> eventsMultiDictionary = 
+            new MultiDictionary<string, Event>(true);
+        private readonly OrderedBag<Event> eventsOrderedBag = new OrderedBag<Event>();
+
+        //protected virtual void OnEventHolderChanged(EventArgs e)
+        //{
+
+        //}
 
         public void AddEvent(DateTime date, string title, string location)
         {
@@ -56,7 +64,7 @@ namespace _1.Events
             if (showedEventsCount == 0)
             {
                 // TODO: Implement event subscribtion and alert of messages.
-                EventMessageSubscriber.NoEventsFound();
+                EventMessageSubscriber.AppendNoEventsFoundMessage();
             }
         }
     }

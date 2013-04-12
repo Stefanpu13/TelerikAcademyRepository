@@ -4,7 +4,7 @@ namespace _1.Events
 {
     static class EventMessageSubscriber
     {
-        private static StringBuilder output = new StringBuilder();
+        private static readonly StringBuilder output = new StringBuilder();
 
         public static StringBuilder Output
         {
@@ -23,7 +23,7 @@ namespace _1.Events
         {
             if (removedEventsCount == 0)
             {
-                NoEventsFound();
+                AppendNoEventsFoundMessage();
             }
             else
             {

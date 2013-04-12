@@ -1,13 +1,11 @@
 using System;
-using System.Linq;
 using System.Collections.Generic;
-using Wintellect.PowerCollections;
 
 namespace _1.Events
 {
     class EventsList
     {
-        static EventHolder events = new EventHolder();       
+        static readonly EventHolder events = new EventHolder();       
         
         internal static void ExecuteAllCommands(List<string> commands)
         {

@@ -41,7 +41,7 @@ namespace _1.Events
                 byDate.RangeFrom(new Event(date, string.Empty, string.Empty), true);
             int showedEventsCount = 0;
 
-            // TODO: Change "foreach" with "for".
+            // TODO: Change "foreach" with "for"?.
             foreach (var eventToShow in eventsToShow)
             {
                 if (showedEventsCount == count)

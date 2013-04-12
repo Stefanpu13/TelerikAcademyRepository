@@ -35,29 +35,31 @@ namespace _1.Events
                 }
             }
         }
-
-        // TODO: Delete.
-        // Should I change the name to "ReadAndExecuteNextCommand" or to 
-        // leave the name and create separate functionality for reading commands. 
+        
         private static bool ExecuteNextCommand(string command)
         {
+            string commandAction = GetCommandAction(command);
+            // If this row remains,the method makes two things - reads command from the console and 
+            // then executes it. Either the method should be renaimed to "ReadAndExecuteNextCommand"
+            // or the reading should be moved to different location.
+            // I choose to move it to different class.
             //string command = Console.ReadLine();
-            if (command[0] == 'A')
+            if (commandAction == "AddEvent")
             {
                 AddEvent(command);
                 return true;
             }
-            if (command[0] == 'D')
+            if (commandAction == "DeleteEvents")
             {
                 DeleteEvents(command);
                 return true;
             }
-            if (command[0] == 'L')
+            if (commandAction == "ListEvents")
             {
                 ListEvents(command);
                 return true;
             }
-            if (command[0] == 'E')
+            if (commandAction == "End")
             {
                 return false;
             }
@@ -66,12 +68,12 @@ namespace _1.Events
 
         private static void ListEvents(string command)
         {
-            DateTime date = GetDate(command, "ListEvents");
+            DateTime eventsDate = GetDate(command, "ListEvents");
             int pipeIndex = command.IndexOf('|');            
             string countString = command.Substring(pipeIndex + 1);
-            int count = int.Parse(countString);
+            int eventsCount = int.Parse(countString);
 
-            events.ListEvents(date, count);
+            events.ListEvents(eventsDate, eventsCount);
         }
 
         private static void DeleteEvents(string command)
@@ -96,8 +98,9 @@ namespace _1.Events
             dateAndTime = GetDate(commandForExecution, commandType);
             int firstPipeIndex = commandForExecution.IndexOf('|');
             int lastPipeIndex = commandForExecution.LastIndexOf('|');
-
-            if (firstPipeIndex == lastPipeIndex)
+            bool eventLocationProvided = (firstPipeIndex != lastPipeIndex);
+            
+            if (!eventLocationProvided)
             {
                 eventTitle = commandForExecution.Substring(firstPipeIndex + 1).Trim();
                 eventLocation = string.Empty;
@@ -112,8 +115,28 @@ namespace _1.Events
 
         private static DateTime GetDate(string command, string commandType)
         {
-            DateTime date = DateTime.Parse(command.Substring(commandType.Length + 1, 20));
+            int dateFormatLength = 20;
+            DateTime date = 
+                DateTime.Parse(command.Substring(commandType.Length + 1, dateFormatLength));
+
             return date;
+        }
+
+        private static string GetCommandAction(string commandForExecution)
+        {
+            string commandAction;
+            int actionStringLength = commandForExecution.IndexOf(" ");
+
+            // Command action "End" does not have empty space, 
+            if (actionStringLength > 0)
+            {
+                commandAction = commandForExecution.Substring(0, actionStringLength);
+                return commandAction;
+            }
+            else
+            {
+                return commandForExecution;
+            }
         }
     }
 }

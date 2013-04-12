@@ -12,10 +12,6 @@ namespace _1.Events
             {
                 return output;
             }
-            //set
-            //{
-            //    output = value;
-            //}
         }
 
         public static void EventAdded()

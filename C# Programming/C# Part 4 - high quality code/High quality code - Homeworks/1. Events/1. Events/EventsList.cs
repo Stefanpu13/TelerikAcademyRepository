@@ -7,24 +7,39 @@ namespace _1.Events
 {
     class EventsList
     {
-        static EventHolder events = new EventHolder();
-
-        internal static void ExecuteAllCommands() 
-        {
-
-        }
-
+        static EventHolder events = new EventHolder();       
         
         internal static void ExecuteAllCommands(List<string> commands)
         {
+            if (commands == null)
+            {
+                throw new ArgumentNullException("commands", "Commands list is not initialised.");
+            }
+            else
+            {
+                if (commands.Count == 0)
+                {
+                    string exceptionMessage = "Commands list does no contain any commands";
+                    throw new ArgumentException(exceptionMessage);
+                }
+                else
+                {
+                    bool commandExecuted;
+                    int commandIndex =0;
 
-
+                    do
+                    {
+                        commandExecuted = ExecuteNextCommand(commands[commandIndex]);
+                        commandIndex++;
+                    } while (commandExecuted);
+                }
+            }
         }
 
         // TODO: Delete.
         // Should I change the name to "ReadAndExecuteNextCommand" or to 
         // leave the name and create separate functionality for reading commands. 
-        internal static bool ExecuteNextCommand(string command)
+        private static bool ExecuteNextCommand(string command)
         {
             //string command = Console.ReadLine();
             if (command[0] == 'A')
@@ -51,11 +66,11 @@ namespace _1.Events
 
         private static void ListEvents(string command)
         {
-            int pipeIndex = command.IndexOf('|');
             DateTime date = GetDate(command, "ListEvents");
+            int pipeIndex = command.IndexOf('|');            
             string countString = command.Substring(pipeIndex + 1);
-
             int count = int.Parse(countString);
+
             events.ListEvents(date, count);
         }
 

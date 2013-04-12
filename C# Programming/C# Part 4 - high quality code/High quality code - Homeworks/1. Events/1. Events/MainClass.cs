@@ -10,13 +10,16 @@ namespace _1.Events
     {
         static void Main(string[] args)
         {
+
             
+            string currentDirectoryPath = Directory.GetCurrentDirectory();
+            string filePath = currentDirectoryPath + "/" +"commands.txt";
 
-            //while (Events.ExecuteNextCommand())
-            //{
+            List<string> commands = CommandsProvider.GetCommands(filePath);
 
-            //}
-            //Console.WriteLine(EventMessageSubscriber.Output);
+            EventsList.ExecuteAllCommands(commands);
+
+            Console.WriteLine(EventMessageSubscriber.Output);
         }
     }
 }

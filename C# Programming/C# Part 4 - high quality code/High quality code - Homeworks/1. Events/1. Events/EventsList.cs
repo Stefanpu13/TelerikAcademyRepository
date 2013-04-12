@@ -95,7 +95,7 @@ namespace _1.Events
         {
             dateAndTime = GetDate(commandForExecution, commandType);
             int firstPipeIndex = commandForExecution.IndexOf('|');
-            int lastPipeIndex = commandForExecution.LastIndexOf('|');
+            int lastPipeIndex = commandForExecution.LastIndexOf('|');            
             bool eventLocationProvided = (firstPipeIndex != lastPipeIndex);
             
             if (!eventLocationProvided)

@@ -1,20 +1,20 @@
 ﻿using System;
 using System.Linq;
 using Wintellect.PowerCollections;
+using System.Collections.Generic;
 
 namespace _1.Events
 {
     class EventHolder
     {
-        // TODO: Change collections names. 
-        MultiDictionary<string, Event> byTitle = new MultiDictionary<string, Event>(true);
-        OrderedBag<Event> byDate = new OrderedBag<Event>();
+        MultiDictionary<string, Event> eventsMultiDictionary = new MultiDictionary<string, Event>(true);
+        OrderedBag<Event> eventsOrderedBag = new OrderedBag<Event>();
 
         public void AddEvent(DateTime date, string title, string location)
         {
             Event newEvent = new Event(date, title, location);
-            byTitle.Add(title.ToLower(), newEvent);
-            byDate.Add(newEvent);
+            eventsMultiDictionary.Add(title.ToLower(), newEvent);
+            eventsOrderedBag.Add(newEvent);
             
             // TODO: Implement event subscribtion and alert of messages.
             EventMessageSubscriber.EventAdded();
@@ -23,14 +23,15 @@ namespace _1.Events
         public void DeleteEvents(string titleToDelete)
         {
             string title = titleToDelete.ToLower();
-            int removedEventsCount= 0;
+            int removedEventsCount = 0;
+            ICollection<Event> eventsWithSameTitle = eventsMultiDictionary[title];
 
-            foreach (var eventToRemove in byTitle[title])
+            foreach (var eventToRemove in eventsWithSameTitle)
             {
                 removedEventsCount++;
-                byDate.Remove(eventToRemove);
+                eventsOrderedBag.Remove(eventToRemove);
             }
-            byTitle.Remove(title);
+            eventsMultiDictionary.Remove(title);
             // TODO: Implement event subscribtion and alert of messages.
             EventMessageSubscriber.EventDeleted(removedEventsCount);
         }
@@ -38,7 +39,7 @@ namespace _1.Events
         public void ListEvents(DateTime date, int count)
         {
             OrderedBag<Event>.View eventsToShow = 
-                byDate.RangeFrom(new Event(date, string.Empty, string.Empty), true);
+                eventsOrderedBag.RangeFrom(new Event(date, string.Empty, string.Empty), true);
             int showedEventsCount = 0;
 
             // TODO: Change "foreach" with "for"?.

@@ -21,6 +21,13 @@ namespace _1.Events
 
         public String Location { get; set; }
 
+        /// <summary>
+        /// Compares two events. The first comparison criteria is event date. If the dates are 
+        /// equal event title is used and if the titles are equal the event location is used. 
+        /// </summary>
+        /// <param name="other">The event object to compare with this event.</param>
+        /// <returns>A value equal to 1 if this event is bigger than the other,
+        /// 0 if two events are equal and -1 if other event is bigger than this. </returns>
         public int CompareTo(object other)
         {
             if (other == null)

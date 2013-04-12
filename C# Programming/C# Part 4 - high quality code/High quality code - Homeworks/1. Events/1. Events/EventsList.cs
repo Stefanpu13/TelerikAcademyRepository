@@ -24,46 +24,44 @@ namespace _1.Events
                 }
                 else
                 {
-                    bool commandExecuted;
-                    int commandIndex =0;
+                    string commandAction;                   
 
-                    do
+                    foreach (var command in commands)
                     {
-                        commandExecuted = ExecuteNextCommand(commands[commandIndex]);
-                        commandIndex++;
-                    } while (commandExecuted);
+                        commandAction = GetCommandAction(command);
+                        ExecuteNextCommand(command, commandAction);
+                    } 
                 }
             }
         }
         
-        private static bool ExecuteNextCommand(string command)
+        private static void ExecuteNextCommand(string command, string commandAction)
         {
-            string commandAction = GetCommandAction(command);
-            // If this row remains,the method makes two things - reads command from the console and 
-            // then executes it. Either the method should be renaimed to "ReadAndExecuteNextCommand"
-            // or the reading should be moved to different location.
-            // I choose to move it to different class.
+            /*
+              If this row remains,the method makes two things - reads command from the console and 
+              then executes it. Either the method should be renaimed to "ReadAndExecuteNextCommand"
+              or the reading should be moved to different location.
+              I choose to move it to different class.
+             */
             //string command = Console.ReadLine();
-            if (commandAction == "AddEvent")
+
+            switch (commandAction)
             {
-                AddEvent(command);
-                return true;
+                case ("AddEvent"):
+                    AddEvent(command);
+                    break;
+                case ("DeleteEvents"):
+                    DeleteEvents(command);
+                    break;
+                case ("ListEvents"):
+                    ListEvents(command);
+                    break;
+                case ("End"):
+                    break;
+                default:
+                    EventMessageSubscriber.AppendEventActionNotFound(commandAction);
+                    break;
             }
-            if (commandAction == "DeleteEvents")
-            {
-                DeleteEvents(command);
-                return true;
-            }
-            if (commandAction == "ListEvents")
-            {
-                ListEvents(command);
-                return true;
-            }
-            if (commandAction == "End")
-            {
-                return false;
-            }
-            return false;
         }
 
         private static void ListEvents(string command)
@@ -127,7 +125,8 @@ namespace _1.Events
             string commandAction;
             int actionStringLength = commandForExecution.IndexOf(" ");
 
-            // Command action "End" does not have empty space, 
+            // Command action "End" does not have empty space and "actionStringLength"
+            // will be -1.
             if (actionStringLength > 0)
             {
                 commandAction = commandForExecution.Substring(0, actionStringLength);

@@ -45,5 +45,10 @@ namespace _1.Events
                 output.Append(eventToPrint + "\n");
             }
         }
+
+        public static void AppendEventActionNotFound(string commandAction) 
+        {
+            output.Append("Action \"" + commandAction + "\" not found.\n");
+        }
     }
 }

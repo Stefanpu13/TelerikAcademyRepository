@@ -50,5 +50,7 @@ namespace MinesSweeper
                 return 10;
             }
         }
+
+        
     }
 }

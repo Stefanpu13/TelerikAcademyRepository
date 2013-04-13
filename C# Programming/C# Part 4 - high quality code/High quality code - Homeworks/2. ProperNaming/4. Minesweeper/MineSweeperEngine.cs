@@ -11,11 +11,11 @@ namespace MinesSweeper
         public static void Run() 
         {
             GameBoard minesweeperBoard = new GameBoard();
-            Initializer.InitializeBoards(minesweeperBoard);
+            Initializer.PerformInitialization(minesweeperBoard);
 
-            DrawBoard(minesweeperBoard.UnderlyingBoard);
-            DrawBoard(minesweeperBoard.DisplayedBoard);
-
+            // TODO: delete test drawing
+            //DrawBoard(minesweeperBoard.UnderlyingBoard);
+            //DrawBoard(minesweeperBoard.DisplayedBoard);
         }
 
         // <summary>

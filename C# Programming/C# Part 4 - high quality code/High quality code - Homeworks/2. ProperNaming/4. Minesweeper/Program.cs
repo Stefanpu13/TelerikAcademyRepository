@@ -6,8 +6,12 @@ namespace MinesSweeper
 	public class Mine
 	{
 		static void Main()
-		{
-			string command = string.Empty;
+        {
+            MinesweeperEngine.Run();
+
+            #region Initial Main method content.
+
+            string command = string.Empty;
 			char[,] displayedBoard = CreateBoard('?');
             char[,] underlyingBoard = PlaceMines();
             
@@ -151,6 +155,8 @@ namespace MinesSweeper
 			Console.WriteLine("Made in Bulgaria - Uauahahahahaha!");
 			Console.WriteLine("AREEEEEEeeeeeee.");
 			Console.Read();
+
+            #endregion
 		}
 
 		private static void DisplayRankings(List<Score> scores)

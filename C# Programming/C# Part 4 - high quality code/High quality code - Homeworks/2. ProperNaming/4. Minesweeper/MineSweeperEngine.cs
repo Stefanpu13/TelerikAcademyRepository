@@ -10,12 +10,13 @@ namespace MinesSweeper
     {
         public static void Run() 
         {
-            GameBoard minesweeperBoard = new GameBoard();
-            Initializer.PerformInitialization(minesweeperBoard);
-
+            //GameBoard minesweeperBoard = new GameBoard();
+            GameInitializer minesweeperInitializer = new GameInitializer();
+            //GameInitializer.PerformNewGameInitialization(minesweeperBoard);
+            GameBoard board = minesweeperInitializer.GameBoard;
             // TODO: delete test drawing
-            //DrawBoard(minesweeperBoard.UnderlyingBoard);
-            //DrawBoard(minesweeperBoard.DisplayedBoard);
+            DrawBoard(board.UnderlyingBoard);
+            DrawBoard(board.DisplayedBoard);
         }
 
         // <summary>

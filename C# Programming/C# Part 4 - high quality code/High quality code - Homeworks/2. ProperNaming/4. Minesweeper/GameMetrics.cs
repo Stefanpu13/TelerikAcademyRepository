@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Reflection;
 
 namespace MinesSweeper
 {
@@ -92,12 +92,28 @@ namespace MinesSweeper
             }
         }
 
-        public static int TotalEmptyFields
+        public int TotalEmptyFields
         {
             get
             {
                 return 35;
             }
         }
+
+        public override string ToString()
+        {
+            StringBuilder gameMetricsInfo = new StringBuilder();
+            FieldInfo[] gameMetrixFields = 
+                this.GetType().GetFields(BindingFlags.NonPublic | BindingFlags.Instance);
+
+            foreach (var fieldInfo in gameMetrixFields)
+            {
+                gameMetricsInfo.AppendLine(fieldInfo.Name + ": " + fieldInfo.GetValue(this));
+            }
+
+            return gameMetricsInfo.ToString();
+        }
+
+
     }
 }

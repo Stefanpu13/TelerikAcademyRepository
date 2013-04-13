@@ -9,7 +9,12 @@ namespace MinesSweeper
     class GameBoard
     {
         private char[,] underlyingBoard;
-        private char[,] displayedBoard;        
+        private char[,] displayedBoard;
+
+        //public GameBoard() 
+        //{
+
+        //}
 
         public char[,] UnderlyingBoard
         {

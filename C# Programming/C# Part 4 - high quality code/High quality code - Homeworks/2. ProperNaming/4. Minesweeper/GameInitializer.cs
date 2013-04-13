@@ -6,22 +6,68 @@ using System.Threading.Tasks;
 
 namespace MinesSweeper
 {
-    class Initializer
+    class GameInitializer
     {
-        public static void PerformInitialization(GameBoard gameBoard) 
+        private GameMetrics thisGameMetrics;
+        private GameBoard gameBoard;
+        private List<int> minesPositions;
+
+        public GameInitializer() 
         {
-            InitializeBoards(gameBoard);
-            PlaceMines(gameBoard);
+            this.PerformNewGameInitialization();
+        }
+
+
+        public GameBoard GameBoard
+        {
+            get
+            {
+                return this.gameBoard;
+            }
+            set
+            {
+                this.gameBoard = value;
+            }
+        }
+
+        public GameMetrics ThisGameMetrics
+        {
+            get
+            {
+                return this.thisGameMetrics;
+            }
+            set
+            {
+                this.thisGameMetrics = value;
+            }
+        }
+
+        private void PerformNewGameInitialization() 
+        {
+            this.GameBoard = new GameBoard();
+            this.thisGameMetrics = new GameMetrics(true);
+            this.InitializeBoards(true);
+        }
+
+        public void PerformRestartedGameInitialization()
+        {
+            this.thisGameMetrics = new GameMetrics(false);
+            this.InitializeBoards(false);
         }
 
         /// <summary>
         /// Initializes the underlying and the displayed boards of the "GameBoard" object.
         /// </summary>
         /// <param name="gameBoard">The object whose boards are initilized.</param>
-        private static void InitializeBoards(GameBoard gameBoard) 
+        private void InitializeBoards(bool newGameIsStarted) 
         {
-            gameBoard.DisplayedBoard = InitializeDisplayedBoard();
-            gameBoard.UnderlyingBoard = InitializeUnderlyingBoard();
+            this.gameBoard.DisplayedBoard = InitializeDisplayedBoard();
+
+            if (newGameIsStarted)
+            {
+                gameBoard.UnderlyingBoard = InitializeUnderlyingBoard();
+                PlaceMines();
+            }
         }
 
         /// <summary>
@@ -84,12 +130,12 @@ namespace MinesSweeper
         /// Randomly places 15 mines in the underlying board.
         /// </summary>
         /// <returns>A two dimensional array representing the underlying board.</returns>
-        private static void PlaceMines(GameBoard gameBoard)
+        private void PlaceMines()
         {
-            int boardColumns = gameBoard.BoardColumns;
-            List<int> minePositions = GenerateMinesPositions();
+            int boardColumns = this.gameBoard.BoardColumns;
+            this.minesPositions = GenerateMinesPositions();
 
-            foreach (int minePosition in minePositions)
+            foreach (int minePosition in minesPositions)
             {
                 int mineRow = (minePosition / boardColumns);
                 int mineColumn = (minePosition % boardColumns);
@@ -102,7 +148,7 @@ namespace MinesSweeper
                 {
                     mineColumn++;
                 }
-                gameBoard.UnderlyingBoard[mineRow, mineColumn - 1] = '*';
+                this.gameBoard.UnderlyingBoard[mineRow, mineColumn - 1] = '*';
             }
         }
     }

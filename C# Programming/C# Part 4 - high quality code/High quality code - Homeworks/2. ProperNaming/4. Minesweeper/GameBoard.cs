@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MinesSweeper
 {
-    class MinesweeperEngine
+    class GameBoard
     {
     }
 }

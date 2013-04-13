@@ -5,13 +5,11 @@ namespace MinesSweeper
 {
 	public class Mine
 	{
-		
-
 		static void Main()
 		{
 			string command = string.Empty;
-			char[,] board = CreateBoard();
-            char[,] boardWithMines = PlaceMines();
+			char[,] displayedBoard = CreateBoard('?');
+            char[,] underlyingBoard = PlaceMines();
             
 			int openedEmptyFields = 0;
 			bool mineIsBlown = false;
@@ -29,7 +27,7 @@ namespace MinesSweeper
 				{
 					Console.WriteLine("Hajde da igraem na “Mini4KI”. Probvaj si kasmeta da otkriesh poleteta bez mini4ki." +
 					" Komanda 'top' pokazva klasiraneto, 'restart' po4va nova igra, 'exit' izliza i hajde 4ao!");
-					DrawBoard(board);
+					DrawBoard(displayedBoard);
 					newGameIsStarted = false;
 				}
 
@@ -42,7 +40,7 @@ namespace MinesSweeper
 				{
 					if (int.TryParse(command[0].ToString(), out row) &&
 					int.TryParse(command[2].ToString(), out column) &&
-						row <= board.GetLength(0) && column <= board.GetLength(1))
+						row <= displayedBoard.GetLength(0) && column <= displayedBoard.GetLength(1))
 					{
 						command = "turn";
 					}
@@ -54,9 +52,9 @@ namespace MinesSweeper
 						DisplayRankings(topScorers);
 						break;
 					case "restart":
-						board = CreateBoard();
-						boardWithMines = PlaceMines();
-						DrawBoard(board);
+                        displayedBoard = CreateBoard('?');
+						underlyingBoard = PlaceMines();
+						DrawBoard(displayedBoard);
 						mineIsBlown = false;
 						newGameIsStarted = false;
 						break;
@@ -64,11 +62,11 @@ namespace MinesSweeper
 						Console.WriteLine("4a0, 4a0, 4a0!");
 						break;
 					case "turn":
-						if (boardWithMines[row, column] != '*')
+						if (underlyingBoard[row, column] != '*')
 						{
-							if (boardWithMines[row, column] == '-')
+							if (underlyingBoard[row, column] == '-')
 							{
-								MakeTurn(board, boardWithMines, row, column);
+								MakeTurn(displayedBoard, underlyingBoard, row, column);
 								openedEmptyFields++;
 							}
 							if (totalEmptyFields == openedEmptyFields)
@@ -77,7 +75,7 @@ namespace MinesSweeper
 							}
 							else
 							{
-								DrawBoard(board);
+								DrawBoard(displayedBoard);
 							}
 						}
 						else
@@ -92,7 +90,7 @@ namespace MinesSweeper
 
 				if (mineIsBlown)
 				{
-					DrawBoard(boardWithMines);
+					DrawBoard(underlyingBoard);
 					Console.Write("\nHrrrrrr! Umria gerojski s {0} to4ki. " +
 						"Daj si niknejm: ", openedEmptyFields);
 
@@ -124,8 +122,8 @@ namespace MinesSweeper
 					DisplayRankings(topScorers);
 
                     // Game reinitialisation TODO: move to different method/part of the program. 
-					board = CreateBoard();
-					boardWithMines = PlaceMines();
+                    displayedBoard = CreateBoard('?');
+					underlyingBoard = PlaceMines();
 					openedEmptyFields = 0;
 					mineIsBlown = false;
 					newGameIsStarted = true;
@@ -134,7 +132,7 @@ namespace MinesSweeper
 				if (allMinesFound)
 				{
 					Console.WriteLine("\nBRAVOOOS! Otvri 35 kletki bez kapka kryv.");
-					DrawBoard(boardWithMines);
+					DrawBoard(underlyingBoard);
 					Console.WriteLine("Daj si imeto, batka: ");
 					string name = Console.ReadLine();
 					Score totalPoints = new Score(name, openedEmptyFields);
@@ -142,8 +140,8 @@ namespace MinesSweeper
 					DisplayRankings(topScorers);
 
                     // Game reinitialisation TODO: move to different method/part of the program. 
-					board = CreateBoard();
-					boardWithMines = PlaceMines();
+                    displayedBoard = CreateBoard('?');
+					underlyingBoard = PlaceMines();
 					openedEmptyFields = 0;
 					allMinesFound = false;
 					newGameIsStarted = true;
@@ -180,6 +178,11 @@ namespace MinesSweeper
 			board[row, column] = adjacentMines;
 		}
 
+        /// <summary>
+        /// Draws the board to be displayed.
+        /// </summary>
+        /// <param name="board">A two dimensional char array representing the board to be
+        /// displayed.</param>
 		private static void DrawBoard(char[,] board)
 		{
             int boardRows = board.GetLength(0);
@@ -199,51 +202,50 @@ namespace MinesSweeper
 			Console.WriteLine("   ---------------------\n");
 		}
 
-		private static char[,] CreateBoard()
+        /* 
+         * TODO: Make this method private and access it through 2 methods - 
+         * "CreateDisplayedBoard()" - to fill with question marks.
+         * "CreateUnderlyingBoard()" - to fill with hyphens.
+         * The reason to do that is to prevent user of the method from accidental creation
+         * of board with different char symbol. 
+         */ 
+
+        /// <summary>
+        /// Fills a game board with specified field symbol. If the field symbol is question mark
+        /// - '?' this is the displayed board. If the symbol is '-' this is the underlying board.
+        /// </summary>
+        /// <returns>Two dimensional array representing the game board.</returns>
+		private static char[,] CreateBoard(char fieldSymbol)
 		{
             int boardRows = 5;
             int boardColumns = 10;
+
             char[,] board = new char[boardRows, boardColumns];
 
             for (int row = 0; row < boardRows; row++)
 			{
                 for (int col = 0; col < boardColumns; col++)
 				{
-					board[row, col] = '?';
+					board[row, col] = fieldSymbol;
 				}
 			}
-
 			return board;
 		}
 
+        /// <summary>
+        /// Randomly places 15 mines in the underlying board.
+        /// </summary>
+        /// <returns>A two dimensional array representing the underlying board.</returns>
 		private static char[,] PlaceMines()
 		{
             // TODO: This code initialises empty board. Place it in different method - 
-            // CreateEmptyBoard. "PlaceMines" should take board as parameter!!?
-			int boardRows = 5;
-			int boardColumns = 10;
-			char[,] board = new char[boardRows, boardColumns];
-
-			for (int row = 0; row < boardRows; row++)
-			{
-                for (int column = 0; column < boardColumns; column++)
-				{
-                    board[row, column] = '-';
-				}
-			}
+            // CreateEmptyBoard. "PlaceMines" should take board as parameter!!? 
+            char[,] board = CreateBoard('-');
+            int boardRows = 5;
+            int boardColumns = 10;
 
             // TODO: move this code in different method  - GenerateMinePositions
-			List<int> mines = new List<int>();
-            // TODO: replace 15 with varialbe minesCount/totalMines
-			while (mines.Count < 15)
-			{
-				Random minePositionGenerator = new Random();
-				int minePosition = minePositionGenerator.Next(50);
-				if (!mines.Contains(minePosition))
-				{
-					mines.Add(minePosition);
-				}
-			}
+            List<int> mines = GenerateMinesPositions();
 
 			foreach (int minePosition in mines)
 			{
@@ -263,6 +265,22 @@ namespace MinesSweeper
 
 			return board;
 		}
+
+        private static List<int> GenerateMinesPositions()
+        {
+            List<int> mines = new List<int>();
+            // TODO: replace 15 with varialbe minesCount/totalMines
+            while (mines.Count < 15)
+            {
+                Random minePositionGenerator = new Random();
+                int minePosition = minePositionGenerator.Next(50);
+                if (!mines.Contains(minePosition))
+                {
+                    mines.Add(minePosition);
+                }
+            }
+            return mines;
+        }
 
 		private static char CountAdjacentMines(char[,] board, int currentRow, int currentCol)
 		{
@@ -329,7 +347,5 @@ namespace MinesSweeper
 			}
 			return char.Parse(adjacentMinesCount.ToString());
 		}
-
-        //public static bool newGameStarted { get; set; }
     }
 }

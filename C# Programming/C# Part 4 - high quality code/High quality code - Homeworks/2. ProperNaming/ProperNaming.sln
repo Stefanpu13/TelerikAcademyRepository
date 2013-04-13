@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Minesweeper", "ProperNaming\Minesweeper.csproj", "{7AFAE45D-8514-489A-9A7C-CE34C2C91CA4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Minesweeper", "4. Minesweeper\Minesweeper.csproj", "{7AFAE45D-8514-489A-9A7C-CE34C2C91CA4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

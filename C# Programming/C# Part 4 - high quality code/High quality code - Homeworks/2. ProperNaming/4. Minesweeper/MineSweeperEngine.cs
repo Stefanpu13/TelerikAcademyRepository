@@ -14,9 +14,10 @@ namespace MinesSweeper
             GameInitializer minesweeperInitializer = new GameInitializer();
             //GameInitializer.PerformNewGameInitialization(minesweeperBoard);
             GameBoard board = minesweeperInitializer.GameBoard;
-            // TODO: delete test drawing
+            // TODO: delete test printing
             DrawBoard(board.UnderlyingBoard);
             DrawBoard(board.DisplayedBoard);
+            Console.WriteLine(minesweeperInitializer.ThisGameMetrics);
         }
 
         // <summary>

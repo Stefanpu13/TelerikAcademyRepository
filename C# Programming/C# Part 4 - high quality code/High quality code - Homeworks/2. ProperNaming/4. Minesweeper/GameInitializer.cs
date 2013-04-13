@@ -17,7 +17,6 @@ namespace MinesSweeper
             this.PerformNewGameInitialization();
         }
 
-
         public GameBoard GameBoard
         {
             get
@@ -42,23 +41,20 @@ namespace MinesSweeper
             }
         }
 
-        private void PerformNewGameInitialization() 
-        {
-            this.GameBoard = new GameBoard();
-            this.thisGameMetrics = new GameMetrics(true);
-            this.InitializeBoards(true);
-        }
-
         public void PerformRestartedGameInitialization()
         {
             this.thisGameMetrics = new GameMetrics(false);
             this.InitializeBoards(false);
         }
 
-        /// <summary>
-        /// Initializes the underlying and the displayed boards of the "GameBoard" object.
-        /// </summary>
-        /// <param name="gameBoard">The object whose boards are initilized.</param>
+        private void PerformNewGameInitialization()
+        {
+            this.GameBoard = new GameBoard();
+            this.thisGameMetrics = new GameMetrics(true);
+            this.InitializeBoards(true);
+        }
+
+        
         private void InitializeBoards(bool newGameIsStarted) 
         {
             this.gameBoard.DisplayedBoard = InitializeDisplayedBoard();
@@ -66,6 +62,7 @@ namespace MinesSweeper
             if (newGameIsStarted)
             {
                 gameBoard.UnderlyingBoard = InitializeUnderlyingBoard();
+                this.minesPositions = GenerateMinesPositions();
                 PlaceMines();
             }
         }
@@ -110,11 +107,11 @@ namespace MinesSweeper
             return board;
         }
 
-        private static List<int> GenerateMinesPositions()
+        private  List<int> GenerateMinesPositions()
         {
             List<int> mines = new List<int>();
             // TODO: replace 15 with varialbe minesCount/totalMines
-            while (mines.Count < 15)
+            while (mines.Count < this.thisGameMetrics.TotalMines)
             {
                 Random minePositionGenerator = new Random();
                 int minePosition = minePositionGenerator.Next(50);
@@ -123,6 +120,7 @@ namespace MinesSweeper
                     mines.Add(minePosition);
                 }
             }
+
             return mines;
         }
 
@@ -132,10 +130,9 @@ namespace MinesSweeper
         /// <returns>A two dimensional array representing the underlying board.</returns>
         private void PlaceMines()
         {
-            int boardColumns = this.gameBoard.BoardColumns;
-            this.minesPositions = GenerateMinesPositions();
+            int boardColumns = this.gameBoard.BoardColumns;            
 
-            foreach (int minePosition in minesPositions)
+            foreach (int minePosition in this.minesPositions)
             {
                 int mineRow = (minePosition / boardColumns);
                 int mineColumn = (minePosition % boardColumns);

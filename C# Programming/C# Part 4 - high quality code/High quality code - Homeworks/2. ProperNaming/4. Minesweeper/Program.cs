@@ -38,12 +38,15 @@ namespace MinesSweeper
 				}
 
 				Console.Write("Daj red i kolona : ");
+                // TODO: "ReadCommand" method.
 				command = Console.ReadLine().Trim();
 
                 // TODO: Command validation. To be placed in different method/class - 
                 // "ValidadeCommand"
 				if (command.Length >= 3)
 				{
+                    // TODO: Is Command "open field"? Then command passed to switch is "turn".
+                    // Move to different method.
 					if (int.TryParse(command[0].ToString(), out row) &&
 					int.TryParse(command[2].ToString(), out column) &&
 						row <= displayedBoard.GetLength(0) && column <= displayedBoard.GetLength(1))
@@ -58,6 +61,7 @@ namespace MinesSweeper
 						DisplayRankings(topScorers);
 						break;
 					case "restart":
+                        // TODO: call initializer restart method.
                         displayedBoard = CreateBoard('?');
 						underlyingBoard = PlaceMines();
 						DrawBoard(displayedBoard);
@@ -68,11 +72,12 @@ namespace MinesSweeper
 						Console.WriteLine("4a0, 4a0, 4a0!");
 						break;
 					case "turn":
+                        // TODO: extract "MakeTurn" method.
 						if (underlyingBoard[row, column] != '*')
 						{
 							if (underlyingBoard[row, column] == '-')
 							{
-								MakeTurn(displayedBoard, underlyingBoard, row, column);
+								OpenField(displayedBoard, underlyingBoard, row, column);
 								openedEmptyFields++;
 							}
 							if (totalEmptyFields == openedEmptyFields)
@@ -178,7 +183,7 @@ namespace MinesSweeper
 			}
 		}
 
-		private static void MakeTurn(char[,] board,
+		private static void OpenField(char[,] board,
 			char[,] boardWithMines, int row, int column)
 		{
 			char adjacentMines = CountAdjacentMines(boardWithMines, row, column);

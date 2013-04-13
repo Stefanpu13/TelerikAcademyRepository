@@ -14,12 +14,43 @@ namespace MinesSweeper
         private int row = 0;
         private int column = 0;
         private int openedEmptyFields = 0;
+        private readonly int totalEmptyFields = 35;
+        private readonly int totalMines = 15;
+        private string command = string.Empty;
 
         public GameMetrics(bool newGameIsStarted) 
         {
             this.NewGameIsStarted = newGameIsStarted;
         }
 			
+        public int TotalMines
+        {
+            get
+            {
+                return this.totalMines;
+            }
+        }
+
+        public int TotalEmptyFields
+        {
+            get
+            {
+                return this.totalEmptyFields;
+            }        
+        }
+
+        public string Command
+        {
+            get
+            {
+                return this.command;
+            }
+            set
+            {
+                this.command = value;
+            }
+        }
+
         public bool MineIsBlown
         {
             get
@@ -92,19 +123,12 @@ namespace MinesSweeper
             }
         }
 
-        public int TotalEmptyFields
-        {
-            get
-            {
-                return 35;
-            }
-        }
-
         public override string ToString()
         {
             StringBuilder gameMetricsInfo = new StringBuilder();
             FieldInfo[] gameMetrixFields = 
-                this.GetType().GetFields(BindingFlags.NonPublic | BindingFlags.Instance);
+                this.GetType().
+                GetFields(BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static);
 
             foreach (var fieldInfo in gameMetrixFields)
             {
@@ -113,7 +137,5 @@ namespace MinesSweeper
 
             return gameMetricsInfo.ToString();
         }
-
-
     }
 }

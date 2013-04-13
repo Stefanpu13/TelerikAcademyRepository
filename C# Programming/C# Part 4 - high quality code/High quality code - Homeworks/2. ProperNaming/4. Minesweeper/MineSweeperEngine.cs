@@ -41,7 +41,5 @@ namespace MinesSweeper
             }
             Console.WriteLine("   ---------------------\n");
         }
-
-
     }
 }

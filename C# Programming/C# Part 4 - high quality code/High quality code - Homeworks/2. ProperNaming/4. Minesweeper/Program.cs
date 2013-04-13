@@ -15,14 +15,16 @@ namespace MinesSweeper
 			char[,] displayedBoard = CreateBoard('?');
             char[,] underlyingBoard = PlaceMines();
             
-			int openedEmptyFields = 0;
+			
 			bool mineIsBlown = false;
+            bool newGameIsStarted = true;
+            bool allMinesFound = false;
 			List<Score> topScorers= new List<Score>(6);
 			int row = 0;
 			int column = 0;
-			bool newGameIsStarted = true;
+            int openedEmptyFields = 0;
 			const int totalEmptyFields = 35;
-			bool allMinesFound = false;
+			
 
             // Playing the game
 			do
@@ -207,14 +209,6 @@ namespace MinesSweeper
 			}
 			Console.WriteLine("   ---------------------\n");
 		}
-
-        /* 
-         * TODO: Make this method private and access it through 2 methods - 
-         * "CreateDisplayedBoard()" - to fill with question marks.
-         * "CreateUnderlyingBoard()" - to fill with hyphens.
-         * The reason to do that is to prevent user of the method from accidental creation
-         * of board with different char symbol. 
-         */ 
 
         /// <summary>
         /// Fills a game board with specified field symbol. If the field symbol is question mark

@@ -1,12 +1,12 @@
-﻿using System;
-using System.Linq;
-using System.Text;
-
-namespace _1.Events
+﻿namespace _1.Events
 {
-    class Event : IComparable
+    using System;
+    using System.Linq;
+    using System.Text;
+
+    public class Event : IComparable
     {
-        public Event(DateTime date, String title, String location)
+        public Event(DateTime date, string title, string location)
         {
             this.Date = date;
             this.Title = title;
@@ -15,17 +15,17 @@ namespace _1.Events
 
         public DateTime Date { get; set; }
 
-        public String Title { get; set; }
+        public string Title { get; set; }
 
-        public String Location { get; set; }
+        public string Location { get; set; }
 
         /// <summary>
         /// Compares two events. The first comparison criteria is event date. If the dates are 
         /// equal event title is used and if the titles are equal the event location is used. 
         /// </summary>
         /// <param name="other">The event object to compare with this event.</param>
-        /// <returns>A value equal to 1 if this event is bigger than the other,
-        /// 0 if two events are equal and -1 if other event is bigger than this. </returns>
+        /// <returns>A value <b>bigger than 0</b> if this event is bigger than the other,
+        /// 0 if two events are equal and <b>smaller than 0</b> if other event is bigger than this. </returns>
         public int CompareTo(object other)
         {
             if (other == null)
@@ -71,11 +71,11 @@ namespace _1.Events
         {            
             StringBuilder eventInformation = new StringBuilder();
 
-            eventInformation.Append(Date.ToString("yyyy-MM-ddTHH:mm:ss"));
-            eventInformation.Append(" | " + Title);
-            if (Location != null && Location != string.Empty)
+            eventInformation.Append(this.Date.ToString("yyyy-MM-ddTHH:mm:ss"));
+            eventInformation.Append(" | " + this.Title);
+            if (this.Location != null && this.Location != string.Empty)
             {
-                eventInformation.Append(" | " + Location);
+                eventInformation.Append(" | " + this.Location);
             }
 
             return eventInformation.ToString();

@@ -1,11 +1,11 @@
-using System;
-using System.Collections.Generic;
-
 namespace _1.Events
 {
-    class EventsList
+    using System;
+    using System.Collections.Generic;
+
+    public class EventsList
     {
-        static readonly EventHolder events = new EventHolder();       
+        private static readonly EventHolder events = new EventHolder();       
         
         internal static void ExecuteAllCommands(List<string> commands)
         {
@@ -28,7 +28,7 @@ namespace _1.Events
                     {
                         commandAction = GetCommandAction(command);
                         ExecuteNextCommand(command, commandAction);
-                    } 
+                    }
                 }
             }
         }
@@ -36,25 +36,26 @@ namespace _1.Events
         private static void ExecuteNextCommand(string command, string commandAction)
         {
             /*
-              If this row remains,the method makes two things - reads command from the console and 
-              then executes it. Either the method should be renaimed to "ReadAndExecuteNextCommand"
-              or the reading should be moved to different location.
-              I choose to move it to different class.
-             */
-            //string command = Console.ReadLine();
+            If input row remains,the method makes two things - reads command from the console and 
+            then executes it. Either the method should be renaimed to "ReadAndExecuteNextCommand"
+            or the reading should be moved to different location.
+            I choose to move it to different class as getting the input data is a different functionality.
+            from processing the data.
+            */
 
+            // string command = Console.ReadLine();
             switch (commandAction)
             {
-                case ("AddEvent"):
+                case "AddEvent":
                     AddEvent(command);
                     break;
-                case ("DeleteEvents"):
+                case "DeleteEvents":
                     DeleteEvents(command);
                     break;
-                case ("ListEvents"):
+                case "ListEvents":
                     ListEvents(command);
                     break;
-                case ("End"):
+                case "End": 
                     break;
                 default:
                     EventMessageSubscriber.AppendEventActionNotFoundMessage(commandAction);
@@ -88,14 +89,19 @@ namespace _1.Events
             events.AddEvent(date, title, location);
         }
 
-        private static void GetParameters(string commandForExecution, string commandType,
-            out DateTime dateAndTime, out string eventTitle, out string eventLocation)
+        // The format is due to StyleCop reccomendation.
+        private static void GetParameters(
+            string commandForExecution,
+            string commandType,
+            out DateTime dateAndTime,
+            out string eventTitle, 
+            out string eventLocation)
         {
             dateAndTime = GetDate(commandForExecution, commandType);
             int firstPipeIndex = commandForExecution.IndexOf('|');
-            int lastPipeIndex = commandForExecution.LastIndexOf('|');            
+            int lastPipeIndex = commandForExecution.LastIndexOf('|');
             bool eventLocationProvided = (firstPipeIndex != lastPipeIndex);
-            
+
             if (!eventLocationProvided)
             {
                 eventTitle = commandForExecution.Substring(firstPipeIndex + 1).Trim();
@@ -103,8 +109,7 @@ namespace _1.Events
             }
             else
             {
-                eventTitle = commandForExecution.
-                    Substring(firstPipeIndex + 1, lastPipeIndex - firstPipeIndex - 1).Trim();
+                eventTitle = commandForExecution.Substring(firstPipeIndex + 1, lastPipeIndex - firstPipeIndex - 1).Trim();
                 eventLocation = commandForExecution.Substring(lastPipeIndex + 1).Trim();
             }
         }
@@ -112,7 +117,7 @@ namespace _1.Events
         private static DateTime GetDate(string command, string commandType)
         {
             int dateFormatLength = 20;
-            DateTime date = 
+            DateTime date =
                 DateTime.Parse(command.Substring(commandType.Length + 1, dateFormatLength));
 
             return date;
@@ -137,4 +142,3 @@ namespace _1.Events
         }
     }
 }
-

@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-
-
-namespace _1.Events
+﻿namespace _1.Events
 {
-    class CommandsProvider
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+
+    public static class CommandsProvider
     {
         /// <summary>
         /// Gets the commands from a "txt" file located in the current working directory. 
         /// </summary>
-        /// <param name="fileName">The name of the txt file. </param>
+        /// <param name="filePath">The name of the txt file. </param>
         /// <returns>A list of string commands.</returns>        
         internal static List<string> GetCommands(string filePath)
         {
@@ -28,7 +27,7 @@ namespace _1.Events
                     }
                 }
             }
-            catch (FileNotFoundException fnfe)
+            catch (FileNotFoundException)
             {
                 // TODO: Implement fnfe message and display it instead of current message. 
                 Console.WriteLine("File " + filePath + " was not found.");
@@ -38,5 +37,3 @@ namespace _1.Events
         }
     }
 }
-
-

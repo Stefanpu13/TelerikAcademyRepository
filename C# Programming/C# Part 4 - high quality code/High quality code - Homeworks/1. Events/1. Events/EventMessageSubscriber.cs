@@ -1,8 +1,8 @@
-﻿using System.Text;
-
-namespace _1.Events
+﻿namespace _1.Events
 {
-    static class EventMessageSubscriber
+    using System.Text;
+
+    internal static class EventMessageSubscriber
     {
         private static readonly StringBuilder output = new StringBuilder();
 

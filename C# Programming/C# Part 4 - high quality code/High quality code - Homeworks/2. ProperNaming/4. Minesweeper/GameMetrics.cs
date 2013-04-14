@@ -16,8 +16,8 @@ namespace MinesSweeper
         private int openedEmptyFields = 0;
         private readonly int totalEmptyFields = 35;
         private readonly int totalMines = 15;
-        private readonly int totalRows = 5;
-        private readonly int totalColumns = 10;
+        private readonly int boardRows = 5;
+        private readonly int boardColumns = 10;
         private string command = string.Empty;
 
         public GameMetrics(bool newGameIsStarted) 
@@ -25,19 +25,19 @@ namespace MinesSweeper
             this.NewGameIsStarted = newGameIsStarted;
         }
 			
-        public int TotalRows
+        public int BoardRows
         {
             get
             {
-                return this.totalRows;
+                return this.boardRows;
             }      
         }
 
-        public int TotalColumns
+        public int BoardColumns
         {
             get
             {
-                return this.totalColumns;
+                return this.boardColumns;
             }       
         }
 

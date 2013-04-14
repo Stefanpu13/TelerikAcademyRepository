@@ -91,8 +91,8 @@ namespace MinesSweeper
         /// <returns>Two dimensional array representing the game board.</returns>
         private char[,] CreateBoard(char fieldSymbol)
         {
-            int boardRows = this.metrics.TotalRows;
-            int boardColumns = this.metrics.TotalColumns;
+            int boardRows = this.metrics.BoardRows;
+            int boardColumns = this.metrics.BoardColumns;
 
             char[,] board = new char[boardRows, boardColumns];
 

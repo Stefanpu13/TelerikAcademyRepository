@@ -6,41 +6,27 @@ using System.Threading.Tasks;
 
 namespace MinesSweeper
 {
-    class Command
+    class CommandHelper
     {
-        private GameMetrics metrics;
-
-        public GameMetrics Metrics
-        {
-            get
-            {
-                return this.metrics;
-            }
-            set
-            {
-                this.metrics = value;
-            }
-        }
-
-        string ReadCommand()
+        public string ReadCommand()
         {
             string command = Console.ReadLine().Trim();
             return command;
         }
 
-        bool IsCommandValid(string command)
+        public bool CommandIsValid(string command)
         {
             return command.Length >= 3;
         }
 
-        bool IsOpenFieldCommand(string command)
+        public bool IsValidOpenFieldCommand(string command, int boardRows, int boardColumns, out int row, out int column)
         {
             string[] fieldCoordinates = command.Split(' ');
-            int row;
-            int column;
+            //int row;
+            //int column;
 
             if (FieldCoordinatesAreValidIntegers(fieldCoordinates, out row, out column) &&
-                FieldCoordinatesAreInBoard(row, column))
+                FieldCoordinatesAreInBoard(row, column, boardRows,boardColumns))
             {
                 return true;
             }
@@ -50,9 +36,9 @@ namespace MinesSweeper
             }
         }
 
-        private bool FieldCoordinatesAreInBoard(int row, int column)
+        private bool FieldCoordinatesAreInBoard(int row, int column, int boardRows,int boardColumns)
         {
-            if ((row <= this.metrics.TotalRows && column <= this.metrics.TotalColumns) &&
+            if ((row <= boardRows && column <= boardColumns) &&
                 (row >= 0 && column >= 0))
             {
                 return true;

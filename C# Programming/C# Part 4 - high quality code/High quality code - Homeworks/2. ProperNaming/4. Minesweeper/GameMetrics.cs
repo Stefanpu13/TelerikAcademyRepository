@@ -8,14 +8,16 @@ namespace MinesSweeper
 {
     class GameMetrics
     {
-        private bool mineIsBlown = false;
         private bool newGameIsStarted;
+        private bool mineIsBlown = false;        
         private bool allMinesFound = false;
         private int row = 0;
         private int column = 0;
         private int openedEmptyFields = 0;
         private readonly int totalEmptyFields = 35;
         private readonly int totalMines = 15;
+        private readonly int totalRows = 5;
+        private readonly int totalColumns = 10;
         private string command = string.Empty;
 
         public GameMetrics(bool newGameIsStarted) 
@@ -23,6 +25,22 @@ namespace MinesSweeper
             this.NewGameIsStarted = newGameIsStarted;
         }
 			
+        public int TotalRows
+        {
+            get
+            {
+                return this.totalRows;
+            }      
+        }
+
+        public int TotalColumns
+        {
+            get
+            {
+                return this.totalColumns;
+            }       
+        }
+
         public int TotalMines
         {
             get

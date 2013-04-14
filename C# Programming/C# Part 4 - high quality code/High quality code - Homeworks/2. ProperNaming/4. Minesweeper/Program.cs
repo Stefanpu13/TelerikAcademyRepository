@@ -7,23 +7,26 @@ namespace MinesSweeper
 	{
 		static void Main()
         {
+            int row1;
+            Console.WriteLine(int.TryParse(null, out row1));
+
             MinesweeperEngine.Run();
 
             #region Initial Main method content.
 
-            string command = string.Empty;
-			char[,] displayedBoard = CreateBoard('?');
-            char[,] underlyingBoard = PlaceMines();
-            
+            List<Score> topScorers = new List<Score>(6);
 			
 			bool mineIsBlown = false;
             bool newGameIsStarted = true;
-            bool allMinesFound = false;
-			List<Score> topScorers= new List<Score>(6);
+            bool allMinesFound = false;			
 			int row = 0;
 			int column = 0;
             int openedEmptyFields = 0;
 			const int totalEmptyFields = 35;
+            string command = string.Empty;
+
+            char[,] displayedBoard = CreateBoard('?');
+            char[,] underlyingBoard = PlaceMines();
 			
 
             // Playing the game
@@ -63,10 +66,10 @@ namespace MinesSweeper
 					case "restart":
                         // TODO: call initializer restart method.
                         displayedBoard = CreateBoard('?');
-						underlyingBoard = PlaceMines();
-						DrawBoard(displayedBoard);
+						underlyingBoard = PlaceMines();						
 						mineIsBlown = false;
 						newGameIsStarted = false;
+                        DrawBoard(displayedBoard);
 						break;
 					case "exit":
 						Console.WriteLine("4a0, 4a0, 4a0!");

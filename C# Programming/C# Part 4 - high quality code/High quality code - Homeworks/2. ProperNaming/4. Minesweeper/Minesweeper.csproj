@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommandHelper.cs" />
     <Compile Include="GameBoard.cs" />
     <Compile Include="GameMetrics.cs" />
     <Compile Include="GameInitializer.cs" />

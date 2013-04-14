@@ -8,7 +8,7 @@ namespace MinesSweeper
 {
     class GameInitializer
     {
-        private GameMetrics thisGameMetrics;
+        private GameMetrics metrics;
         private GameBoard gameBoard;
         private List<int> minesPositions;
 
@@ -29,39 +29,38 @@ namespace MinesSweeper
             }
         }
 
-        public GameMetrics ThisGameMetrics
+        public GameMetrics Metrics
         {
             get
             {
-                return this.thisGameMetrics;
+                return this.metrics;
             }
             set
             {
-                this.thisGameMetrics = value;
+                this.metrics = value;
             }
         }
 
         public void PerformRestartedGameInitialization()
         {
-            this.thisGameMetrics = new GameMetrics(false);
+            this.metrics = new GameMetrics(false);
             this.InitializeBoards(false);
         }
 
         private void PerformNewGameInitialization()
         {
             this.GameBoard = new GameBoard();
-            this.thisGameMetrics = new GameMetrics(true);
+            this.metrics = new GameMetrics(true);
             this.InitializeBoards(true);
         }
-
         
         private void InitializeBoards(bool newGameIsStarted) 
         {
-            this.gameBoard.DisplayedBoard = InitializeDisplayedBoard();
+            this.gameBoard.DisplayedBoard =this.InitializeDisplayedBoard();
 
             if (newGameIsStarted)
             {
-                gameBoard.UnderlyingBoard = InitializeUnderlyingBoard();
+                this.gameBoard.UnderlyingBoard =this.InitializeUnderlyingBoard();
                 this.minesPositions = GenerateMinesPositions();
                 PlaceMines();
             }
@@ -71,18 +70,18 @@ namespace MinesSweeper
         /// Fills the underlying board with hyphens '-'.
         /// </summary>
         /// <returns>A two dimensional array of hyphens.</returns>
-        private static char[,] InitializeUnderlyingBoard()
+        private char[,] InitializeUnderlyingBoard()
         {
-            return CreateBoard('-');
+            return this.CreateBoard('-');
         }
 
         /// <summary>
         /// Filles the diaplyed board with question marks - '?'.
         /// </summary>
         /// <returns>A two dimensional array of question marks.</returns>
-        private static char[,] InitializeDisplayedBoard()
+        private char[,] InitializeDisplayedBoard()
         {
-            return CreateBoard('?');
+            return this.CreateBoard('?');
         }
 
         /// <summary>
@@ -90,10 +89,10 @@ namespace MinesSweeper
         /// - '?' this is the displayed board. If the symbol is '-' this is the underlying board.
         /// </summary>
         /// <returns>Two dimensional array representing the game board.</returns>
-        private static char[,] CreateBoard(char fieldSymbol)
+        private char[,] CreateBoard(char fieldSymbol)
         {
-            int boardRows = 5;
-            int boardColumns = 10;
+            int boardRows = this.metrics.TotalRows;
+            int boardColumns = this.metrics.TotalColumns;
 
             char[,] board = new char[boardRows, boardColumns];
 
@@ -110,8 +109,8 @@ namespace MinesSweeper
         private  List<int> GenerateMinesPositions()
         {
             List<int> mines = new List<int>();
-            // TODO: replace 15 with varialbe minesCount/totalMines
-            while (mines.Count < this.thisGameMetrics.TotalMines)
+            
+            while (mines.Count < this.metrics.TotalMines)
             {
                 Random minePositionGenerator = new Random();
                 int minePosition = minePositionGenerator.Next(50);

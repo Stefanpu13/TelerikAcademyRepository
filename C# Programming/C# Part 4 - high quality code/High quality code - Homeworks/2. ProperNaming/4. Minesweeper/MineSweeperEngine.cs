@@ -54,6 +54,8 @@ namespace MinesSweeper
         private static void PlayGame(GameInitializer initializer, GameBoard board) 
         {
             CommandHelper commandHelper = new CommandHelper();
+            GamePlay gameplay = new GamePlay();
+            TopScores topScores = new TopScores();
             string command = commandHelper.ReadCommand();
             int boardRows = board.BoardRows;
             int boardColumns = board.BoardColumns;
@@ -67,63 +69,47 @@ namespace MinesSweeper
                     {
                         case "top":
                             //DisplayRankings(topScorers);
+                            topScores.DisplayRankings();
                             break;
                         case "restart":
                             // TODO: call initializer restart method.
                             initializer.PerformRestartedGameInitialization();
                             break;
                         case "exit":
-                            Console.WriteLine("4a0, 4a0, 4a0!");
+                            Console.WriteLine("Bye!");
                             break;
                         case "turn":
                             // TODO: extract "MakeTurn" method.
-                            MakeTurn(initializer, board);
+                            gameplay.MakeTurn(initializer, board);
                             break;
                         default:
-                            Console.WriteLine("\nGreshka! nevalidna Komanda\n");
+                            Console.WriteLine("\nOops! Unvalid command!\n");
                             break;
                     }
 
-                    //if (mineIsBlown)
-                    //{
-                    //    DrawBoard(underlyingBoard);
-                    //    Console.Write("\nHrrrrrr! Umria gerojski s {0} to4ki. " +
-                    //        "Daj si niknejm: ", openedEmptyFields);
+                    if (initializer.Metrics.MineIsBlown)
+                    {
+                        DrawBoard(board.UnderlyingBoard);
+                        Console.Write("\nHrrrrrr!You died. You opened {0} fields. "
+                            ,initializer.Metrics.OpenedEmptyFields);
+                        Console.Write("Enter your name: ");
 
-                    //    //TODO: read name and place in topscorers list - move to different method
-                    //    // Create Scorers Class(!!!?) where to add and display top scorers.
-                    //    string name = Console.ReadLine();
-                    //    Score finalScore = new Score(name, openedEmptyFields);
-                    //    if (topScorers.Count < 5)
-                    //    {
-                    //        topScorers.Add(finalScore);
-                    //    }
-                    //    else
-                    //    {
-                    //        for (int i = 0; i < topScorers.Count; i++)
-                    //        {
-                    //            if (topScorers[i].Points < finalScore.Points)
-                    //            {
-                    //                topScorers.Insert(i, finalScore);
-                    //                topScorers.RemoveAt(topScorers.Count - 1);
-                    //                break;
-                    //            }
-                    //        }
-                    //    }
-                    //    // TODO: sort Scorers - move to different method.
-                    //    topScorers.Sort((Score scoreOne, Score scoreTwo) =>
-                    //        scoreTwo.Name.CompareTo(scoreOne.Name));
-                    //    topScorers.Sort((Score scoreOne, Score scoreTwo) =>
-                    //        scoreTwo.Points.CompareTo(scoreOne.Points));
-                    //    DisplayRankings(topScorers);
+                        //TODO: read name and place in topscorers list - move to different method
+                        // Create Scorers Class(!!!?) where to add and display top scorers.
+                        string name = Console.ReadLine();
+                        Score finalScore = new Score(name,initializer.Metrics.OpenedEmptyFields);
 
-                    //    // Game reinitialisation TODO: move to different method/part of the program. 
-                    //    displayedBoard = CreateBoard('?');
-                    //    underlyingBoard = PlaceMines();
-                    //    openedEmptyFields = 0;
-                    //    mineIsBlown = false;
-                    //    newGameIsStarted = true;
-                    //}
+                        topScores.Add(finalScore);
+                        topScores.DisplayRankings();
+
+                      
+                        // Game reinitialisation TODO: move to different method/part of the program. 
+                        //displayedBoard = CreateBoard('?');
+                        //underlyingBoard = PlaceMines();
+                        //openedEmptyFields = 0;
+                        //mineIsBlown = false;
+                        //newGameIsStarted = true;
+                    }
 
                     //if (allMinesFound)
                     //{

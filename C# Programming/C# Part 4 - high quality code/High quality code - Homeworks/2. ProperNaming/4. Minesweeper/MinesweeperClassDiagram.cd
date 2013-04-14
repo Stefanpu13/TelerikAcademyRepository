@@ -10,14 +10,15 @@
   <Class Name="MinesSweeper.Score" Collapsed="true">
     <Position X="5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAACAAAAAgAAAAAAAAAQAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAACAAAAAgAQAAAAAAAQAAAAEAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Score.cs</FileName>
     </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="MinesSweeper.GameInitializer" Collapsed="true">
     <Position X="1.25" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAEQQgABAAIAABQAAAEAABAAAAAAgAgAAABAAA=</HashCode>
+      <HashCode>AAAAAAAEQQAABAAAAABQAAAEAABABAAAAgQgAAABAAA=</HashCode>
       <FileName>GameInitializer.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -31,7 +32,7 @@
   <Class Name="MinesSweeper.MinesweeperEngine" Collapsed="true">
     <Position X="5.75" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAI=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAABAAAAAEAAAAAAAAAAAAAAAAAAAAI=</HashCode>
       <FileName>MinesweeperEngine.cs</FileName>
     </TypeIdentifier>
   </Class>

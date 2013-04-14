@@ -1,25 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MinesSweeper
+﻿namespace MinesSweeper
 {
-    class GamePlay
+    using System;
+
+    public class GamePlay
     {
-        private GameBoard OpenField(GameBoard board, int row, int column)
+        private static char CountAdjacentMines(char[,] underlyingBoard, int currentRow, int currentCol)
         {
-            char adjacentMines = CountAdjacentMines(board.UnderlyingBoard, row, column);
-            board.UnderlyingBoard[row, column] = adjacentMines;
-            board.DisplayedBoard[row, column] = adjacentMines;
-
-            return board;
-        }
-
-        private static char CountAdjacentMines(char[,]underlyingBoard, int currentRow, int currentCol)
-        {
-            // TODO: chexk adjacent spelling
             int adjacentMinesCount = 0;
             int boardRows = underlyingBoard.GetLength(0);
             int boardColumns = underlyingBoard.GetLength(1);
@@ -84,28 +70,107 @@ namespace MinesSweeper
             return char.Parse(adjacentMinesCount.ToString());
         }
 
-        public void MakeTurn(GameInitializer initializer, GameBoard board)
+        public void MakeTurn(ref GameMetrics metrics, ref GameBoard board)
         {
-
-            if (board.UnderlyingBoard[initializer.Metrics.Row, initializer.Metrics.Column] != '*')
+            if (board.UnderlyingBoard[metrics.Row, metrics.Column] != '*')
             {
-                if (board.UnderlyingBoard[initializer.Metrics.Row, initializer.Metrics.Column] != '*')
+                if (board.UnderlyingBoard[metrics.Row, metrics.Column] == '-')
                 {
-                    this.OpenField(board, initializer.Metrics.Row, initializer.Metrics.Column);
-                    initializer.Metrics.OpenedEmptyFields++;
+                    this.OpenField(ref board, metrics.Row, metrics.Column);
+                    metrics.OpenedEmptyFields++;
+                    metrics.IsFirstTurn = false;
                 }
-                if (initializer.Metrics.TotalEmptyFields == initializer.Metrics.OpenedEmptyFields)
+                if (metrics.TotalEmptyFields == metrics.OpenedEmptyFields)
                 {
-                    initializer.Metrics.AllMinesFound = true;
-                }
-                else
-                {
-                    //DrawBoard(displayedBoard);
+                    metrics.AllMinesFound = true;
                 }
             }
             else
             {
-                initializer.Metrics.MineIsBlown = true;
+                if (metrics.IsFirstTurn)
+                {
+                    this.GuaranteeSaveFirstTurn(ref metrics, ref board);
+                    this.OpenField(ref board, metrics.Row, metrics.Column);
+                    metrics.OpenedEmptyFields++;
+
+                    metrics.IsFirstTurn = false;
+                }
+                else
+                {
+                    metrics.MineIsBlown = true;
+                }
+            }
+        }
+
+        public bool CheckIsGameFinished(GameMetrics metrics, GameBoard board, TopScores topScores)
+        {
+            if (metrics.MineIsBlown)
+            {
+                return true;
+            }
+
+            if (metrics.AllMinesFound)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public void ExecuteCommand(GameInitializer initializer, ref GameMetrics metrics,
+            GameBoard board, TopScores topScores, string command)
+        {
+            switch (command)
+            {
+                case "top":
+                    topScores.DisplayRankings();
+                    break;
+                case "restart":
+                    initializer.PerformRestartedGameInitialization(ref metrics, ref board);
+                    break;
+                case "exit":
+                    metrics.GameIsExited = true;
+                    Console.WriteLine("Bye!");
+                    break;
+                case "turn":
+                    this.MakeTurn(ref metrics, ref board);
+                    break;
+                default:
+                    Console.WriteLine("\nOops! Unvalid command!\n");
+                    break;
+            }
+        }
+
+        private GameBoard OpenField(ref GameBoard board, int row, int column)
+        {
+            char adjacentMines = CountAdjacentMines(board.UnderlyingBoard, row, column);
+            board.UnderlyingBoard[row, column] = adjacentMines;
+            board.DisplayedBoard[row, column] = adjacentMines;
+
+            return board;
+        }
+
+        private void GuaranteeSaveFirstTurn(ref GameMetrics metrics, ref GameBoard board)
+        {
+            // See: http://www.techuser.net/mineclick.html for first click behaviour
+
+            int boardRows = board.BoardRows;
+            int boardColumns = board.BoardColumns;
+            int currentRow = metrics.Row;
+            int currentColumn = metrics.Column;
+
+            for (int row = 0; row < boardRows; row++)
+            {
+                for (int column = 0; column < boardColumns; column++)
+                {
+                    if ((row != currentRow || column != currentColumn) &&
+                        board.UnderlyingBoard[row, column] != '*')
+                    {
+                        board.UnderlyingBoard[row, column] = '*';
+                        board.UnderlyingBoard[currentRow, currentColumn] = '-';
+                        return;
+                    }
+                }
             }
         }
     }

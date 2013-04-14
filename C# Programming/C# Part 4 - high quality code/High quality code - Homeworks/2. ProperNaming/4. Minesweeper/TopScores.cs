@@ -1,26 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MinesSweeper
+﻿namespace MinesSweeper
 {
-    class TopScores
+    using System;
+    using System.Collections.Generic;
+
+    public class TopScores
     {
         private Score score;
         private List<Score> scores;
-        //private string name;
-        //private int points;
 
-        public TopScores() 
+        public TopScores()
         {
             this.Scores = new List<Score>();
         }
 
-        public TopScores(string name, int points) 
+        public TopScores(string name, int points)
         {
             this.Score = new Score(name, points);
+            this.Scores = new List<Score>();
         }
 
         public List<Score> Scores
@@ -47,28 +43,9 @@ namespace MinesSweeper
             }
         }
 
-        public void Add(Score score) 
+        public void Add(Score score)
         {
             this.SortedAdd(score);
-        }
-
-        private void SortedAdd(Score score) 
-        {
-            int position = 0;
-
-            while (score.CompareTo(this.Scores[position])<0)
-            {
-                position++;
-            }
-
-            this.Scores.Insert(position, score);
-
-            if (this.Scores.Count>5)
-            {
-                this.Scores.RemoveAt(this.Scores.Count - 1);
-            }
-
-            //DisplayRankings(topScorers);
         }
 
         public void DisplayRankings()
@@ -86,6 +63,37 @@ namespace MinesSweeper
             else
             {
                 Console.WriteLine("No scores!!\n");
+            }
+        }
+
+        private void SortedAdd(Score score)
+        {
+            int position = 0;
+
+            if (this.Scores.Count == 0)
+            {
+                this.Scores.Add(score);
+            }
+            else
+            {
+                while (position < this.Scores.Count)
+                {
+                    if (score.CompareTo(this.Scores[position]) < 0)
+                    {
+                        position++;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+
+                this.Scores.Insert(position, score);
+
+                if (this.Scores.Count > 5)
+                {
+                    this.Scores.RemoveAt(this.Scores.Count - 1);
+                }
             }
         }
     }

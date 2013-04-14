@@ -1,87 +1,54 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MinesSweeper
+﻿namespace MinesSweeper
 {
-    class GameInitializer
+    using System;
+    using System.Collections.Generic;
+
+    public class GameInitializer
     {
-        private GameMetrics metrics;
-        private GameBoard gameBoard;
         private List<int> minesPositions;
 
-        public GameInitializer() 
+        public void PerformRestartedGameInitialization(ref GameMetrics metrics, ref GameBoard board)
         {
-            this.PerformNewGameInitialization();
+            metrics = new GameMetrics(false);
+            this.InitializeBoards(false, metrics, board);
         }
 
-        public GameBoard GameBoard
+        public void PerformNewGameInitialization(ref GameMetrics metrics, ref GameBoard board)
         {
-            get
-            {
-                return this.gameBoard;
-            }
-            set
-            {
-                this.gameBoard = value;
-            }
+            board = new GameBoard();
+            metrics = new GameMetrics(true);
+            this.InitializeBoards(true, metrics, board);
         }
 
-        public GameMetrics Metrics
+        private void InitializeBoards(bool newGameIsStarted, GameMetrics metrics, GameBoard board)
         {
-            get
-            {
-                return this.metrics;
-            }
-            set
-            {
-                this.metrics = value;
-            }
-        }
-
-        public void PerformRestartedGameInitialization()
-        {
-            this.metrics = new GameMetrics(false);
-            this.InitializeBoards(false);
-        }
-
-        private void PerformNewGameInitialization()
-        {
-            this.GameBoard = new GameBoard();
-            this.metrics = new GameMetrics(true);
-            this.InitializeBoards(true);
-        }
-        
-        private void InitializeBoards(bool newGameIsStarted) 
-        {
-            this.gameBoard.DisplayedBoard =this.InitializeDisplayedBoard();
+            board.DisplayedBoard = this.InitializeDisplayedBoard(board.BoardRows, board.BoardColumns);
+            board.UnderlyingBoard =
+                    this.InitializeUnderlyingBoard(board.BoardRows, board.BoardColumns);
 
             if (newGameIsStarted)
             {
-                this.gameBoard.UnderlyingBoard =this.InitializeUnderlyingBoard();
-                this.minesPositions = GenerateMinesPositions();
-                PlaceMines();
+                this.minesPositions = this.GenerateMinesPositions(metrics);
             }
+            this.PlaceMines(board);
         }
 
         /// <summary>
         /// Fills the underlying board with hyphens '-'.
         /// </summary>
         /// <returns>A two dimensional array of hyphens.</returns>
-        private char[,] InitializeUnderlyingBoard()
+        private char[,] InitializeUnderlyingBoard(int boardRows, int boardColumns)
         {
-            return this.CreateBoard('-');
+            return this.CreateBoard('-', boardRows, boardColumns);
         }
 
         /// <summary>
         /// Filles the diaplyed board with question marks - '?'.
         /// </summary>
         /// <returns>A two dimensional array of question marks.</returns>
-        private char[,] InitializeDisplayedBoard()
+        private char[,] InitializeDisplayedBoard(int boardRows, int boardColumns)
         {
-            return this.CreateBoard('?');
+            return this.CreateBoard('?', boardRows, boardColumns);
         }
 
         /// <summary>
@@ -89,11 +56,8 @@ namespace MinesSweeper
         /// - '?' this is the displayed board. If the symbol is '-' this is the underlying board.
         /// </summary>
         /// <returns>Two dimensional array representing the game board.</returns>
-        private char[,] CreateBoard(char fieldSymbol)
+        private char[,] CreateBoard(char fieldSymbol, int boardRows, int boardColumns)
         {
-            int boardRows = this.metrics.BoardRows;
-            int boardColumns = this.metrics.BoardColumns;
-
             char[,] board = new char[boardRows, boardColumns];
 
             for (int row = 0; row < boardRows; row++)
@@ -103,14 +67,15 @@ namespace MinesSweeper
                     board[row, col] = fieldSymbol;
                 }
             }
+
             return board;
         }
 
-        private  List<int> GenerateMinesPositions()
+        private List<int> GenerateMinesPositions(GameMetrics metrics)
         {
             List<int> mines = new List<int>();
-            
-            while (mines.Count < this.metrics.TotalMines)
+
+            while (mines.Count < metrics.TotalMines)
             {
                 Random minePositionGenerator = new Random();
                 int minePosition = minePositionGenerator.Next(50);
@@ -127,9 +92,9 @@ namespace MinesSweeper
         /// Randomly places 15 mines in the underlying board.
         /// </summary>
         /// <returns>A two dimensional array representing the underlying board.</returns>
-        private void PlaceMines()
+        private void PlaceMines(GameBoard board)
         {
-            int boardColumns = this.gameBoard.BoardColumns;            
+            int boardColumns = board.BoardColumns;
 
             foreach (int minePosition in this.minesPositions)
             {
@@ -144,7 +109,7 @@ namespace MinesSweeper
                 {
                     mineColumn++;
                 }
-                this.gameBoard.UnderlyingBoard[mineRow, mineColumn - 1] = '*';
+                board.UnderlyingBoard[mineRow, mineColumn - 1] = '*';
             }
         }
     }

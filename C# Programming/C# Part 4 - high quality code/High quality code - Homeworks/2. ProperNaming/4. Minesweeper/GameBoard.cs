@@ -1,20 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MinesSweeper
+﻿namespace MinesSweeper
 {
-    class GameBoard
+    using System;
+
+    public class GameBoard
     {
         private char[,] underlyingBoard;
         private char[,] displayedBoard;
-
-        //public GameBoard() 
-        //{
-
-        //}
 
         public char[,] UnderlyingBoard
         {
@@ -56,6 +47,28 @@ namespace MinesSweeper
             }
         }
 
-        
+        public void DrawBoard(char[,] board)
+        {
+            int boardRows = board.GetLength(0);
+            int boardColumns = board.GetLength(1);
+
+            Console.WriteLine("\n    0 1 2 3 4 5 6 7 8 9");
+            Console.WriteLine("   ---------------------");
+
+            for (int row = 0; row < boardRows; row++)
+            {
+                Console.Write("{0} | ", row);
+
+                for (int col = 0; col < boardColumns; col++)
+                {
+                    Console.Write(string.Format("{0} ", board[row, col]));
+                }
+
+                Console.Write("|");
+                Console.WriteLine();
+            }
+
+            Console.WriteLine("   ---------------------\n");
+        }        
     }
 }

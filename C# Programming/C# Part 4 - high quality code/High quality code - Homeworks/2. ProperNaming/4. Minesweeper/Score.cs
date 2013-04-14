@@ -2,22 +2,10 @@
 {
     using System;
 
-    public class Score:IComparable
+    public class Score : IComparable
     {
         private string name;
         private int points;
-
-        public string Name
-        {
-            get { return name; }
-            set { name = value; }
-        }
-
-        public int Points
-        {
-            get { return points; }
-            set { points = value; }
-        }
 
         public Score() { }
 
@@ -27,11 +15,23 @@
             this.points = points;
         }
 
-        public int CompareTo(object other) 
+        public string Name
+        {
+            get { return this.name; }
+            set { this.name = value; }
+        }
+
+        public int Points
+        {
+            get { return this.points; }
+            set { this.points = value; }
+        }
+
+        public int CompareTo(object other)
         {
             if (other == null)
             {
-                return 1; 
+                return 1;
             }
             else
             {
@@ -41,7 +41,9 @@
 
                     if (this.Points == otherScore.Points)
                     {
-                        return this.Name.CompareTo(otherScore.Name);
+                        // From two players with equal result the one whose name is 
+                        // lexicographically first will be placed at a higher position.
+                        return otherScore.Name.CompareTo(this.Name);
                     }
                     else
                     {
@@ -52,8 +54,7 @@
                 {
                     throw new ArgumentException("Object is not a score");
                 }
-            }          
+            }
         }
     }
-    
 }

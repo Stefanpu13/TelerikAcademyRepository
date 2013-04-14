@@ -1,36 +1,61 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Reflection;
+﻿
 
 namespace MinesSweeper
 {
-    class GameMetrics
+    using System.Reflection;
+    using System.Text;
+
+    public class GameMetrics
     {
-        private bool newGameIsStarted;
-        private bool mineIsBlown = false;        
-        private bool allMinesFound = false;
-        private int row = 0;
-        private int column = 0;
-        private int openedEmptyFields = 0;
         private readonly int totalEmptyFields = 35;
         private readonly int totalMines = 15;
         private readonly int boardRows = 5;
         private readonly int boardColumns = 10;
-        private string command = string.Empty;
+        private bool isFirstTurn = true;
+        private bool newGameIsStarted;
+        private bool mineIsBlown = false;
+        private bool allMinesFound = false;
+        private int row = 0;
+        private int column = 0;
+        private int openedEmptyFields = 0;        
+        private bool gameIsExited = false;
 
-        public GameMetrics(bool newGameIsStarted) 
+
+        public GameMetrics(bool newGameIsStarted)
         {
             this.NewGameIsStarted = newGameIsStarted;
         }
-			
+
+        public bool IsFirstTurn
+        {
+            get
+            {
+                return this.isFirstTurn;
+            }
+            set
+            {
+                this.isFirstTurn = value;
+            }
+        }
+
+        public bool GameIsExited
+        {
+            get
+            {
+                return this.gameIsExited;
+            }
+            set
+            {
+                this.gameIsExited = value;
+            }
+        }
+
         public int BoardRows
         {
             get
             {
                 return this.boardRows;
-            }      
+            }
         }
 
         public int BoardColumns
@@ -38,7 +63,7 @@ namespace MinesSweeper
             get
             {
                 return this.boardColumns;
-            }       
+            }
         }
 
         public int TotalMines
@@ -54,18 +79,6 @@ namespace MinesSweeper
             get
             {
                 return this.totalEmptyFields;
-            }        
-        }
-
-        public string Command
-        {
-            get
-            {
-                return this.command;
-            }
-            set
-            {
-                this.command = value;
             }
         }
 
@@ -144,7 +157,7 @@ namespace MinesSweeper
         public override string ToString()
         {
             StringBuilder gameMetricsInfo = new StringBuilder();
-            FieldInfo[] gameMetrixFields = 
+            FieldInfo[] gameMetrixFields =
                 this.GetType().
                 GetFields(BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static);
 

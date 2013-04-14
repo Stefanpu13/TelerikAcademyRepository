@@ -46,8 +46,9 @@
     <Compile Include="GameMetrics.cs" />
     <Compile Include="GameInitializer.cs" />
     <Compile Include="GamePlay.cs" />
+    <Compile Include="Messages.cs" />
     <Compile Include="MinesweeperEngine.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="Mine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Score.cs" />
     <Compile Include="TopScores.cs" />

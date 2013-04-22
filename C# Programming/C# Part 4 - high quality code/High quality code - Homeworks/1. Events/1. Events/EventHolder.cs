@@ -19,8 +19,7 @@
             this.eventsMultiDictionary.Add(title.ToLower(), newEvent);
             this.eventsOrderedBag.Add(newEvent);
 
-            this.OnEventHolderChanged(EventArgs.Empty);
-            // TODO: Implement event subscribtion and alert of messages.
+            this.OnEventHolderChanged(EventArgs.Empty);            
             EventMessageSubscriber.AppendEventAddedMessage();
         }
 
@@ -38,8 +37,7 @@
 
             this.eventsMultiDictionary.Remove(title);
 
-            this.OnEventHolderChanged(EventArgs.Empty);
-            // TODO: Implement event subscribtion and alert of messages.
+            this.OnEventHolderChanged(EventArgs.Empty);            
             EventMessageSubscriber.AppendEventDeletedMessage(removedEventsCount);
         }
 
@@ -56,16 +54,14 @@
                     break;
                 }
 
-                this.OnEventHolderChanged(EventArgs.Empty);
-                // TODO: Implement event subscribtion and alert of messages.
+                this.OnEventHolderChanged(EventArgs.Empty);                
                 EventMessageSubscriber.PrintEvent(eventToShow);
                 showedEventsCount++;
             }
 
             if (showedEventsCount == 0)
             {
-                this.OnEventHolderChanged(EventArgs.Empty);
-                // TODO: Implement event subscribtion and alert of messages.
+                this.OnEventHolderChanged(EventArgs.Empty);                
                 EventMessageSubscriber.AppendNoEventsFoundMessage();
             }
         }

@@ -28,8 +28,7 @@
                 }
             }
             catch (FileNotFoundException)
-            {
-                // TODO: Implement fnfe message and display it instead of current message. 
+            { 
                 Console.WriteLine("File " + filePath + " was not found.");
             }
 

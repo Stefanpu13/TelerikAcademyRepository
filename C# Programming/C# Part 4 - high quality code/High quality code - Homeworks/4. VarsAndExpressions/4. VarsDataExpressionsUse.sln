@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "1.Size", "4. VarsDataExpressionsUse\1.Size.csproj", "{6F82F97A-7F0A-482C-8525-E7E935360A2C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "2. Statistics", "2. Statistics\2. Statistics.csproj", "{0CFB2218-5264-491A-8722-2D12B1BAA78C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6F82F97A-7F0A-482C-8525-E7E935360A2C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F82F97A-7F0A-482C-8525-E7E935360A2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F82F97A-7F0A-482C-8525-E7E935360A2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F82F97A-7F0A-482C-8525-E7E935360A2C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0CFB2218-5264-491A-8722-2D12B1BAA78C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0CFB2218-5264-491A-8722-2D12B1BAA78C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0CFB2218-5264-491A-8722-2D12B1BAA78C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0CFB2218-5264-491A-8722-2D12B1BAA78C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

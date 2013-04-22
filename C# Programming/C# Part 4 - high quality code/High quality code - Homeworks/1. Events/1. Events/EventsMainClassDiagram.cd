@@ -36,7 +36,7 @@
       <FileName>MainClass.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="_1.Events.EventsList">
+  <Class Name="_1.Events.EventsList" Collapsed="true">
     <Position X="2.25" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAABAAAAAAEoAABAAAAAAAAAAAAAAAIAAAAAgAAABAA=</HashCode>

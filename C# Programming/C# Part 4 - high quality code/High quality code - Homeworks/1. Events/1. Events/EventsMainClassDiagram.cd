@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ClassDiagram MajorVersion="1" MinorVersion="1">
+<ClassDiagram MajorVersion="1" MinorVersion="1" GroupingSetting="Access">
   <Class Name="_1.Events.CommandsProvider" Collapsed="true">
     <Position X="0.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
@@ -13,7 +13,7 @@
       <HashCode>AAAAAAAAAAAAAEQEAAIAAAAAAAAAAAABAAAAAAAAAAA=</HashCode>
       <FileName>Event.cs</FileName>
     </TypeIdentifier>
-    <Lollipop Position="0.2" Collapsed="true" />
+    <Lollipop Position="1.3" Collapsed="true" />
   </Class>
   <Class Name="_1.Events.EventHolder" Collapsed="true">
     <Position X="4" Y="0.5" Width="1.5" />

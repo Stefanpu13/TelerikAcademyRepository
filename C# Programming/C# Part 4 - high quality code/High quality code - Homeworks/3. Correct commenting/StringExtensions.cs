@@ -12,7 +12,7 @@
      * Method "ToValidLatinFileName()" changed to throw ArgumentNullException.
      * For training purposes only.
      */
-
+    
     public static class StringExtensions
     {        
         /// <summary>
@@ -226,9 +226,10 @@
 
             for (int i = 0; i < latinLetters.Length; i++)
             {
-                input = input.Replace(latinLetters[i], bulgarianRepresentationOfLatinKeyboard[i]);
-                input = input.Replace(latinLetters[i].ToUpper(), bulgarianRepresentationOfLatinKeyboard[i].
-                    ToUpper());
+                input = input.Replace(latinLetters[i],
+                    bulgarianRepresentationOfLatinKeyboard[i]);
+                input = input.Replace(latinLetters[i].ToUpper(),
+                    bulgarianRepresentationOfLatinKeyboard[i].ToUpper());
             }
 
             return input;
@@ -288,7 +289,7 @@
         /// </example>
         public static string ToValidLatinFileName(this string input)
         {
-            if (input==null)
+            if (input == null)
             {
                 string message = "Null input can not be validated as filename.";
                 throw new ArgumentNullException("input", message);
@@ -309,9 +310,9 @@
         /// the input string length, then the whole string is returned.</remarks>
         public static string GetFirstCharacters(this string input, int charsCount)
         {
-
             return input.Substring(0, Math.Min(input.Length, charsCount));
         }
+
         /// <summary>
         /// Gets the file extension from a given filename.
         /// </summary>

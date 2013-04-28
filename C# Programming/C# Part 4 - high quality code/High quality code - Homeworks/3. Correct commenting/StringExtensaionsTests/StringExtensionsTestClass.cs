@@ -1,9 +1,9 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Extensions;
+﻿namespace StringExtensionsTests
+{
+    using Extensions;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using System;
 
-namespace StringExtensionsTests
-{    
     /* Note:
      * Only a few methods are tested for training purposes.
      * In addition, "ToValidLatinFileName()" method is changed
@@ -13,18 +13,22 @@ namespace StringExtensionsTests
     [TestClass]
     public class StringExtensionsTestClass
     {
+        /// <summary>
+        /// 
+        /// </summary>
         [TestMethod]
-        public void ToValidUsernameTest()
+        public void ToValidUsername_InputWithInvalidSymbols_ShouldRemoveInvalidSymbols()
         {
-            var input = "Стефan ?";
+            var input = "Стефaн ?";
             string validatedUserName = input.ToValidUsername();
             var expected = "Stefan";
 
-            Assert.AreEqual(expected , validatedUserName);
+            Assert.AreEqual(expected, validatedUserName);
         }
 
+        // Ain`t that name beutiful :)? more than 100 symbols long!!!
         [TestMethod]
-        public void ConvertCyrillicToLatinLettersTest() 
+        public void ConvertCyrillicToLatinLetters_CapitalLetterWithTwoLetterLatinEquivalent_ShouldCapitalizeOnlyFirstLetterInLatinEquivalent()
         {
             var input = "Ютията ще падне.";
             string inputToLatin = input.ConvertCyrillicToLatinLetters();
@@ -33,19 +37,19 @@ namespace StringExtensionsTests
             Assert.AreEqual(expected, inputToLatin);
         }
 
-        [TestMethod]        
-        public void ToValidLatinFilenameNormalTest() 
+        [TestMethod]
+        public void ToValidLatinFilename_SpacesInInput_ShouldReplaceSpacesWithHypens()
         {
-            var validInput = "Тхиs will =have   some hypенс.";
+            var validInput = "Тхиs will have   some hypенс";
             string validatedFilename = validInput.ToValidLatinFileName();
-            var expected = "This-will-have---some-hypens.";
+            var expected = "This-will-have---some-hypens";
 
             Assert.AreEqual(expected, validatedFilename);
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void ToValidLatinFilenameExceptionTest()
+        public void ToValidLatinFilename_MethodCalledOnNull_ShouldThrowArgumentNullException()
         {
             string nullInput = null;
             Assert.AreEqual(null, nullInput.ToValidLatinFileName());

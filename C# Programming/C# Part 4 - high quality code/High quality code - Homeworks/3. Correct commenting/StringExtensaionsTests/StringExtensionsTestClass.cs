@@ -13,9 +13,6 @@
     [TestClass]
     public class StringExtensionsTestClass
     {
-        /// <summary>
-        /// 
-        /// </summary>
         [TestMethod]
         public void ToValidUsername_InputWithInvalidSymbols_ShouldRemoveInvalidSymbols()
         {
@@ -26,7 +23,7 @@
             Assert.AreEqual(expected, validatedUserName);
         }
 
-        // Ain`t that name beutiful :)? more than 100 symbols long!!!
+        // Ain`t that name beautiful :)? more than 100 symbols long!!!
         [TestMethod]
         public void ConvertCyrillicToLatinLetters_CapitalLetterWithTwoLetterLatinEquivalent_ShouldCapitalizeOnlyFirstLetterInLatinEquivalent()
         {
